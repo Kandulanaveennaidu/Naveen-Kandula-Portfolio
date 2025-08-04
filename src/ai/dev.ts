@@ -1,4 +1,4 @@
 import { config } from 'dotenv';
 config();
 
-import '@/ai/flows/generate-initial-message.ts';
+import '@/ai/flows/continue-conversation.ts';

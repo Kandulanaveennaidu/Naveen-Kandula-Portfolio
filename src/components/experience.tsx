@@ -16,13 +16,13 @@ const experienceData = [
   },
   {
     role: "Software Developer",
-    company: "CBTS",
-    period: "Jul 2021 - Feb 2022",
-    description: "Contributed to the development of large-scale enterprise applications, focusing on backend services and database management.",
+    company: "ATTPL Group, Ahmedabad, Gujarat, India",
+    period: "Dec 2022 - Sep 2024",
+    description: "Developed and maintained web applications, focusing on creating robust backend services and interactive frontend experiences.",
     achievements: [
-      "Developed and maintained RESTful APIs for various client projects.",
-      "Collaborated on designing and optimizing database schemas for performance.",
-      "Participated in the full software development lifecycle, from requirements gathering to deployment.",
+      "Contributed to the development of a scalable e-commerce platform.",
+      "Implemented new features for a client's CRM system, improving data management.",
+      "Worked on integrating third-party APIs for payment processing and shipping.",
     ]
   }
 ];
