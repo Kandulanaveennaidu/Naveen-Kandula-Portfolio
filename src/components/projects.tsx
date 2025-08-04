@@ -16,7 +16,7 @@ const projectsData = [
     imageHint: "communication dashboard",
     techStack: ["React", "Node.js", "AI Chatbot", "WebSocket"],
     liveDemo: "#",
-    githubRepo: "#"
+    githubRepo: "https://github.com/Kandulanaveennaidu"
   },
   {
     title: "AI-Enhanced Video Conferencing",
@@ -25,7 +25,7 @@ const projectsData = [
     imageHint: "video conference",
     techStack: ["WebRTC", "Python", "TensorFlow", "React"],
     liveDemo: "#",
-    githubRepo: "#"
+    githubRepo: "https://github.com/Kandulanaveennaidu"
   },
   {
     title: "Intelligent Election Management",
@@ -34,7 +34,7 @@ const projectsData = [
     imageHint: "analytics dashboard",
     techStack: ["React", "Python", "Scikit-learn", "GraphQL"],
     liveDemo: "#",
-    githubRepo: "#"
+    githubRepo: "https://github.com/Kandulanaveennaidu"
   },
   {
     title: "Calendit.ai Scheduling Platform",
@@ -43,7 +43,7 @@ const projectsData = [
     imageHint: "calendar schedule",
     techStack: ["NLP", "React", "Node.js", "MongoDB"],
     liveDemo: "#",
-    githubRepo: "#"
+    githubRepo: "https://github.com/Kandulanaveennaidu"
   }
 ];
 

@@ -52,7 +52,7 @@ export default function Hero() {
                 </a>
               </Button>
               <Button size="lg" variant="secondary" asChild>
-                <a href="/resume.pdf" download>
+                <a href="https://drive.google.com/file/d/1PwZ2CmF0lHIUJrRkc7_L-2VVfMoCoasU/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                   Download Resume
                   <Download className="ml-2 h-5 w-5" />
                 </a>
@@ -60,12 +60,12 @@ export default function Hero() {
             </div>
             <div className="mt-8 flex gap-4">
               <Button variant="ghost" size="icon" asChild>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <a href="https://github.com/Kandulanaveennaidu" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                   <Github className="h-6 w-6" />
                 </a>
               </Button>
               <Button variant="ghost" size="icon" asChild>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/kandulanaveen1/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <Linkedin className="h-6 w-6" />
                 </a>
               </Button>
