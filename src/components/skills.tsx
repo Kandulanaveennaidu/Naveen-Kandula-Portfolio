@@ -7,6 +7,7 @@ import { Card, CardContent } from './ui/card';
 import { Progress } from './ui/progress';
 import { BrainCircuit, Code, Database } from 'lucide-react';
 import CodeBlock from './code-block';
+import { Button } from './ui/button';
 
 const skillsData = {
   "AI & Machine Learning": [
@@ -86,12 +87,12 @@ export default function Skills() {
                   className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6"
                 >
                   {skillsData[activeCategory].map((skill, index) => (
-                    <div key={index} className="space-y-2">
+                    <div key={index} className="space-y-2 group">
                       <div className="flex justify-between items-center">
                         <h3 className="font-medium">{skill.name}</h3>
                         <span className="text-sm font-semibold text-primary">{skill.level}%</span>
                       </div>
-                      <Progress value={skill.level} className="h-2" />
+                      <Progress value={skill.level} className="h-2 group-hover:h-3 transition-all duration-300" />
                     </div>
                   ))}
                 </motion.div>
@@ -104,5 +105,3 @@ export default function Skills() {
     </section>
   );
 }
-
-import { Button } from '@/components/ui/button';
