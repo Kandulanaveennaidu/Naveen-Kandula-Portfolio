@@ -1,12 +1,12 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState, useEffect, useRef } from 'react';
+import { useFormStatus } from 'react-dom';
 import { getInitialMessage } from '@/lib/actions';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Bot, Sparkles, User } from 'lucide-react';
-import { useEffect, useRef } from 'react';
 
 const initialState = {
   message: null,
@@ -24,7 +24,7 @@ function SubmitButton() {
 }
 
 export default function ChatbotPreview() {
-  const [state, formAction] = useFormState(getInitialMessage, initialState);
+  const [state, formAction] = useActionState(getInitialMessage, initialState);
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
