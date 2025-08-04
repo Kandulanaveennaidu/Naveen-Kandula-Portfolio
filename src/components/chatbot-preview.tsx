@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useEffect, useRef, useState } from 'react';
+import { useActionState, useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { sendMessage } from '@/lib/actions';
 import { Input } from './ui/input';
@@ -89,7 +89,7 @@ export default function ChatbotPreview() {
           </div>
         </ScrollArea>
         <form ref={formRef} action={formAction} className="space-y-4">
-          <input type="hidden" name="history" value={JSON.stringify(state.history)} />
+          <input type="hidden" name="history" value={JSON.stringify(state.history ?? [])} />
           <div>
             <Input name="message" placeholder="e.g., 'Tell me about your projects.'" required />
             {state.error && <p className="text-destructive text-sm mt-2">{state.error}</p>}

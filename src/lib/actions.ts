@@ -28,7 +28,7 @@ export async function sendMessage(prevState: FormState, formData: FormData): Pro
     };
   }
   
-  const history = prevState.history ? JSON.parse(prevState.history as any) : [];
+  const history = prevState.history || [];
 
   try {
     const result = await continueConversation({ 
