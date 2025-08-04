@@ -1,7 +1,10 @@
+'use client';
+
 import Image from 'next/image';
 import { Button } from './ui/button';
 import Typewriter from './typewriter';
-import { ArrowRight, Download, Github, Linkedin } from 'lucide-react';
+import { ArrowRight, Download, Github, Linkedin, BotIcon, BrainCircuitIcon, CodeIcon, MessageSquareIcon, ZapIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
@@ -11,9 +14,14 @@ export default function Hero() {
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
       </div>
       
-      <div className="container mx-auto px-4 md:px-6 relative z-10 animate-enter" style={{ animationDelay: '200ms', animationFillMode: 'backwards' }}>
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12">
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+          <motion.div 
+            className="flex flex-col items-center md:items-start text-center md:text-left"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
             <div className="w-40 h-40 rounded-full mb-6 overflow-hidden border-4 border-primary/50 shadow-lg">
               <Image
                 src="https://placehold.co/300x300.png"
@@ -62,74 +70,54 @@ export default function Hero() {
                 </a>
               </Button>
             </div>
-          </div>
+          </motion.div>
           <div className="hidden md:block">
-            <div className="w-full max-w-md mx-auto aspect-square rounded-full bg-primary/10 flex items-center justify-center p-8 relative">
-               <div className="w-full h-full rounded-full bg-primary/20 flex items-center justify-center p-8 animate-pulse">
-                   <div className="w-full h-full rounded-full bg-primary/30 flex items-center justify-center p-8">
-                      <BotIcon className="w-32 h-32 text-primary" />
-                   </div>
-               </div>
-               <CodeIcon className="w-16 h-16 text-primary/80 absolute top-8 left-8 animate-pulse delay-200" />
-               <BrainCircuitIcon className="w-16 h-16 text-primary/80 absolute bottom-8 right-8 animate-pulse delay-400" />
-               <MessageSquareIcon className="w-16 h-16 text-primary/80 absolute bottom-8 left-8 animate-pulse delay-600" />
-               <ZapIcon className="w-16 h-16 text-primary/80 absolute top-8 right-8 animate-pulse delay-800" />
-            </div>
+            <motion.div 
+              className="w-full max-w-md mx-auto aspect-square relative"
+              style={{ perspective: 1000 }}
+            >
+               <motion.div 
+                 className="w-full h-full"
+                 initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
+                 animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                 transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }}
+               >
+                 <div className="w-full h-full rounded-full bg-primary/10 flex items-center justify-center p-8 relative">
+                    <div className="w-full h-full rounded-full bg-primary/20 flex items-center justify-center p-8">
+                        <div className="w-full h-full rounded-full bg-primary/30 flex items-center justify-center p-8">
+                           <BotIcon className="w-32 h-32 text-primary" />
+                        </div>
+                    </div>
+                 </div>
+               </motion.div>
+               <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  className="w-16 h-16 text-primary/80 absolute top-8 left-8"
+                ><CodeIcon className="w-full h-full" /></motion.div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.7, duration: 0.5 }}
+                  className="w-16 h-16 text-primary/80 absolute bottom-8 right-8"
+                ><BrainCircuitIcon className="w-full h-full" /></motion.div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.9, duration: 0.5 }}
+                  className="w-16 h-16 text-primary/80 absolute bottom-8 left-8"
+                ><MessageSquareIcon className="w-full h-full" /></motion.div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.1, duration: 0.5 }}
+                  className="w-16 h-16 text-primary/80 absolute top-8 right-8"
+                ><ZapIcon className="w-full h-full" /></motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
     </section>
   );
-}
-
-function BotIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 8V4H8" />
-      <rect width="16" height="12" x="4" y="8" rx="2" />
-      <path d="M2 14h2" />
-      <path d="M20 14h2" />
-      <path d="M15 13v2" />
-      <path d="M9 13v2" />
-    </svg>
-  )
-}
-
-
-function BrainCircuitIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 0 0 9 22a4 4 0 0 0 5-3.469 4 4 0 0 0 .556-6.588 4 4 0 0 0-2.526-5.77A3 3 0 0 0 12 5Z" />
-      <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 0 1 15 22a4 4 0 0 1-5-3.469 4 4 0 0 1-.556-6.588 4 4 0 0 1 2.526-5.77A3 3 0 0 1 12 5Z" />
-      <path d="M12 12v.01" />
-      <path d="M15 13a3 3 0 1 0-3-3" />
-      <path d="M9 13a3 3 0 1 1 3-3" />
-    </svg>
-  )
-}
-
-
-function CodeIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="16 18 22 12 16 6" />
-      <polyline points="8 6 2 12 8 18" />
-    </svg>
-  )
-}
-
-function MessageSquareIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-    </svg>
-  )
-}
-
-function ZapIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-    </svg>
-  )
 }

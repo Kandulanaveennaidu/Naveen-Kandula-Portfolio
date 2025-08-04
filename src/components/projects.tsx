@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Badge } from './ui/badge';
 import { Github, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const projectsData = [
   {
@@ -58,28 +59,33 @@ export default function Projects() {
           {projectsData.map((project, index) => (
             <Dialog key={index}>
               <DialogTrigger asChild>
-                <Card className="group overflow-hidden transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2 cursor-pointer bg-card/50 backdrop-blur-sm">
-                  <CardHeader className="p-0">
-                    <div className="aspect-video overflow-hidden">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        width={600}
-                        height={400}
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        data-ai-hint={project.imageHint}
-                      />
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-6">
-                    <CardTitle className="font-headline text-xl mb-2">{project.title}</CardTitle>
-                    <div className="flex flex-wrap gap-2">
-                      {project.techStack.map((tech) => (
-                        <Badge key={tech} variant="secondary">{tech}</Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                <motion.div
+                  whileHover={{ scale: 1.03, y: -5, boxShadow: "0 10px 20px hsla(var(--primary), 0.2)" }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  <Card className="group overflow-hidden transition-all duration-300 cursor-pointer bg-card/50 backdrop-blur-sm h-full flex flex-col">
+                    <CardHeader className="p-0">
+                      <div className="aspect-video overflow-hidden">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          width={600}
+                          height={400}
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          data-ai-hint={project.imageHint}
+                        />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="p-6 flex-grow">
+                      <CardTitle className="font-headline text-xl mb-2">{project.title}</CardTitle>
+                      <div className="flex flex-wrap gap-2">
+                        {project.techStack.map((tech) => (
+                          <Badge key={tech} variant="secondary">{tech}</Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[625px]">
                 <DialogHeader>

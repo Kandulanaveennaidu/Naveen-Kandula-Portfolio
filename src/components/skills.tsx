@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Badge } from './ui/badge';
 import { Card, CardContent } from './ui/card';
 import { Progress } from './ui/progress';
-import { BrainCircuit, Code, Database, Wrench } from 'lucide-react';
+import { BrainCircuit, Code, Database } from 'lucide-react';
+import CodeBlock from './code-block';
 
 const skillsData = {
   "AI & Machine Learning": [
@@ -71,25 +73,36 @@ export default function Skills() {
             </Button>
           ))}
         </div>
-        <Card className="bg-card/50 backdrop-blur-sm p-6 md:p-8">
-          <CardContent className="p-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-              {skillsData[activeCategory].map((skill, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <h3 className="font-medium">{skill.name}</h3>
-                    <span className="text-sm font-semibold text-primary">{skill.level}%</span>
-                  </div>
-                  <Progress value={skill.level} className="h-2" />
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <Card className="bg-card/50 backdrop-blur-sm p-6 md:p-8">
+            <CardContent className="p-0">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeCategory}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6"
+                >
+                  {skillsData[activeCategory].map((skill, index) => (
+                    <div key={index} className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <h3 className="font-medium">{skill.name}</h3>
+                        <span className="text-sm font-semibold text-primary">{skill.level}%</span>
+                      </div>
+                      <Progress value={skill.level} className="h-2" />
+                    </div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+            </CardContent>
+          </Card>
+          <CodeBlock />
+        </div>
       </div>
     </section>
   );
 }
 
-// Button needs to be imported or defined
 import { Button } from '@/components/ui/button';
