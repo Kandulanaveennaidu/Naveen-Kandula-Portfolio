@@ -44,8 +44,10 @@ Experience:
    - Engineered an AI-enhanced video conferencing tool with real-time ML processing.
    - Automated 60% of routine interactions with smart automation systems.
 
-2. Software Developer at ATTPL Group, Ahmedabad, Gujarat, India (Dec 2022 - Sep 2024)
-   - Developed and maintained web applications, focusing on robust backend services and interactive frontend experiences.
+2. Full Stack Developer at ATTPL Group, Ahmedabad, Gujarat, India (Dec 2022 - Sep 2024)
+   - Developed secure, scalable AI-enhanced election management platform with intelligent voter verification and fraud detection capabilities, handling voter registration and result tabulation for 500,000+ voters.
+   - Implemented AI-powered data visualization and predictive analytics components with Chart.js, providing real-time election insights and improving stakeholder decision-making processes by 45%.
+   - Integrated machine learning algorithms for anomaly detection, voter pattern analysis, and automated result validation, ensuring election integrity with 99.8% accuracy.
    - Contributed to building a scalable e-commerce platform.
    - Implemented new features for a client's CRM system.
 

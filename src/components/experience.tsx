@@ -15,14 +15,16 @@ const experienceData = [
     ]
   },
   {
-    role: "Software Developer",
+    role: "Full Stack Developer",
     company: "ATTPL Group, Ahmedabad, Gujarat, India",
     period: "Dec 2022 - Sep 2024",
-    description: "Developed and maintained web applications, focusing on creating robust backend services and interactive frontend experiences.",
+    description: "Developed and maintained web applications, focusing on creating robust backend services and interactive frontend experiences. Specialized in AI-enhanced election management systems.",
     achievements: [
+      "Developed secure, scalable AI-enhanced election management platform with intelligent voter verification and fraud detection, handling 500,000+ voters.",
+      "Implemented AI-powered data visualization with Chart.js, improving stakeholder decision-making by 45%.",
+      "Integrated ML algorithms for anomaly detection and voter pattern analysis, ensuring 99.8% election integrity.",
       "Contributed to the development of a scalable e-commerce platform.",
       "Implemented new features for a client's CRM system, improving data management.",
-      "Worked on integrating third-party APIs for payment processing and shipping.",
     ]
   }
 ];
