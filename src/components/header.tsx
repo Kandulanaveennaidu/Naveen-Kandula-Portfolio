@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Bot, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from './theme-toggle';
+import Logo from './logo';
 
 const navItems = [
   { href: '#summary', label: 'About' },
@@ -42,35 +44,39 @@ export default function Header() {
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         <a href="#hero" className="flex items-center gap-2" onClick={closeMenu}>
-          <Bot className="h-8 w-8 text-primary" />
+          <Logo className="h-8 w-8 text-primary" />
           <span className="font-headline text-xl font-bold">Kandula Naveen</span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-6">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        <div className="flex items-center gap-2">
+          <nav className="hidden md:flex items-center gap-6">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
 
-        <Button variant="outline" size="sm" className="hidden md:inline-flex" asChild>
-          <a href="#contact">Let's Talk</a>
-        </Button>
+          <Button variant="outline" size="sm" className="hidden md:inline-flex" asChild>
+            <a href="#contact">Let's Talk</a>
+          </Button>
+          
+          <ThemeToggle />
 
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </Button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

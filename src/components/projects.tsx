@@ -60,21 +60,29 @@ export default function Projects() {
             <Dialog key={index}>
               <DialogTrigger asChild>
                 <motion.div
-                  whileHover={{ scale: 1.03, y: -5, boxShadow: "0 10px 20px hsla(var(--primary), 0.2)" }}
+                  whileHover={{ scale: 1.03, y: -5 }}
                   transition={{ type: 'spring', stiffness: 300 }}
+                  style={{ transformStyle: 'preserve-3d', perspective: 1000 }}
                 >
                   <Card className="group overflow-hidden transition-all duration-300 cursor-pointer bg-card/50 backdrop-blur-sm h-full flex flex-col">
                     <CardHeader className="p-0">
-                      <div className="aspect-video overflow-hidden">
+                      <motion.div 
+                        className="aspect-video overflow-hidden"
+                        whileHover={{
+                          rotateY: 10,
+                          rotateX: -10,
+                          boxShadow: "0 20px 30px -10px hsla(var(--primary), 0.3)",
+                        }}
+                      >
                         <Image
                           src={project.image}
                           alt={project.title}
                           width={600}
                           height={400}
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          className="object-cover transition-transform duration-300 group-hover:scale-110"
                           data-ai-hint={project.imageHint}
                         />
-                      </div>
+                      </motion.div>
                     </CardHeader>
                     <CardContent className="p-6 flex-grow">
                       <CardTitle className="font-headline text-xl mb-2">{project.title}</CardTitle>

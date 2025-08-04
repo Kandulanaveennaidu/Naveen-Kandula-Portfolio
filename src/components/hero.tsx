@@ -10,7 +10,7 @@ export default function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary to-background animate-subtle-gradient bg-[size:400%_400%]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary to-background animate-subtle-gradient bg-[size:400%_400%] dark:from-background dark:via-secondary/50 dark:to-background" />
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
       </div>
       
@@ -74,13 +74,14 @@ export default function Hero() {
           <div className="hidden md:block">
             <motion.div 
               className="w-full max-w-md mx-auto aspect-square relative"
-              style={{ perspective: 1000 }}
+              style={{ perspective: 1000, transformStyle: "preserve-3d" }}
             >
                <motion.div 
                  className="w-full h-full"
                  initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
                  animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                  transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }}
+                 whileHover={{ rotateY: 15, rotateX: -15, scale: 1.05 }}
                >
                  <div className="w-full h-full rounded-full bg-primary/10 flex items-center justify-center p-8 relative">
                     <div className="w-full h-full rounded-full bg-primary/20 flex items-center justify-center p-8">
@@ -91,26 +92,26 @@ export default function Hero() {
                  </div>
                </motion.div>
                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 0, z: -50 }}
+                  animate={{ opacity: 1, scale: 1, z: 50 }}
                   transition={{ delay: 0.5, duration: 0.5 }}
                   className="w-16 h-16 text-primary/80 absolute top-8 left-8"
                 ><CodeIcon className="w-full h-full" /></motion.div>
                 <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 0, z: -50 }}
+                  animate={{ opacity: 1, scale: 1, z: 50 }}
                   transition={{ delay: 0.7, duration: 0.5 }}
                   className="w-16 h-16 text-primary/80 absolute bottom-8 right-8"
                 ><BrainCircuitIcon className="w-full h-full" /></motion.div>
                 <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 0, z: -50 }}
+                  animate={{ opacity: 1, scale: 1, z: 50 }}
                   transition={{ delay: 0.9, duration: 0.5 }}
                   className="w-16 h-16 text-primary/80 absolute bottom-8 left-8"
                 ><MessageSquareIcon className="w-full h-full" /></motion.div>
                 <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 0, z: -50 }}
+                  animate={{ opacity: 1, scale: 1, z: 50 }}
                   transition={{ delay: 1.1, duration: 0.5 }}
                   className="w-16 h-16 text-primary/80 absolute top-8 right-8"
                 ><ZapIcon className="w-full h-full" /></motion.div>
