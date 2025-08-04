@@ -1,11 +1,12 @@
+'use client';
 import { Briefcase } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 
 const experienceData = [
   {
     role: "Full Stack Developer",
-    company: "Vitel Global Communication LLC",
-    period: "Feb 2022 - Present",
+    company: "Vitelglobal Communication, Hyderabad, India",
+    period: "Oct 2024 - Present",
     description: "Led the transformation of traditional applications into AI-driven solutions, enhancing user engagement and automating key processes.",
     achievements: [
       "Integrated AI chatbots into an omni-channel communication platform, improving user engagement by over 40%.",
@@ -20,11 +21,9 @@ const experienceData = [
     period: "Dec 2022 - Sep 2024",
     description: "Developed and maintained web applications, focusing on creating robust backend services and interactive frontend experiences. Specialized in AI-enhanced election management systems.",
     achievements: [
-      "Developed secure, scalable AI-enhanced election management platform with intelligent voter verification and fraud detection, handling 500,000+ voters.",
-      "Implemented AI-powered data visualization with Chart.js, improving stakeholder decision-making by 45%.",
-      "Integrated ML algorithms for anomaly detection and voter pattern analysis, ensuring 99.8% election integrity.",
-      "Contributed to the development of a scalable e-commerce platform.",
-      "Implemented new features for a client's CRM system, improving data management.",
+      "Developed secure, scalable AI-enhanced election management platform with intelligent voter verification and fraud detection capabilities, handling voter registration and result tabulation for 500,000+ voters.",
+      "Implemented AI-powered data visualization and predictive analytics components with Chart.js, providing real-time election insights and improving stakeholder decision-making processes by 45%.",
+      "Integrated machine learning algorithms for anomaly detection, voter pattern analysis, and automated result validation, ensuring election integrity with 99.8% accuracy."
     ]
   }
 ];

@@ -37,7 +37,7 @@ Skills:
 - Database & Tools: MySQL, MongoDB, AWS S3, Docker, Git & GitHub
 
 Experience:
-1. Full Stack Developer at Vitel Global Communication LLC (Feb 2022 - Present)
+1. Full Stack Developer at Vitelglobal Communication, Hyderabad, India (Oct 2024 - Present)
    - Led the transformation of applications into AI-driven solutions.
    - Integrated AI chatbots into an omni-channel platform, boosting user engagement by over 40%.
    - Reduced customer service response times by 50% with a conversational AI system.
@@ -48,8 +48,6 @@ Experience:
    - Developed secure, scalable AI-enhanced election management platform with intelligent voter verification and fraud detection capabilities, handling voter registration and result tabulation for 500,000+ voters.
    - Implemented AI-powered data visualization and predictive analytics components with Chart.js, providing real-time election insights and improving stakeholder decision-making processes by 45%.
    - Integrated machine learning algorithms for anomaly detection, voter pattern analysis, and automated result validation, ensuring election integrity with 99.8% accuracy.
-   - Contributed to building a scalable e-commerce platform.
-   - Implemented new features for a client's CRM system.
 
 Projects:
 - Omni-Channel Communication Platform: An advanced communication hub with an integrated AI chatbot.
