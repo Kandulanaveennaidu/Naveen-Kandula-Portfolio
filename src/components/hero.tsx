@@ -24,7 +24,7 @@ export default function Hero() {
           >
             <div className="w-40 h-40 rounded-full mb-6 overflow-hidden border-4 border-primary/50 shadow-lg">
               <Image
-                src="https://placehold.co/300x300.png"
+                src="/profile.png"
                 alt="Kandula Naveen"
                 width={160}
                 height={160}
