@@ -33,7 +33,7 @@ const projectsData = [
     image: "https://placehold.co/600x400.png",
     imageHint: "calendar schedule app",
     techStack: ["React", "AI/NLP", "Node.js", "MongoDB"],
-    liveDemo: "#",
+    liveDemo: "https://calendit.ai/",
     githubRepo: "https://github.com/Kandulanaveennaidu"
   },
   {
