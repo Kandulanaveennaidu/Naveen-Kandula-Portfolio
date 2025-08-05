@@ -9,8 +9,8 @@ export default function Logo({ className }: { className?: string }) {
       fill="currentColor"
     >
       <g>
-        <path d="M 20,80 L 20,20 L 50,20 L 50,35 L 35,35 L 35,45 L 50,45 L 50,65 L 35,65 L 35,80 L 20,80 Z" />
-        <path d="M 55,80 L 55,20 L 70,20 L 80,40 L 80,20 L 95,20 L 95,80 L 80,80 L 80,55 L 70,35 L 70,80 L 55,80 Z" />
+        <path d="M 20,80 L 20,20 L 25,20 L 45,45 L 45,20 L 50,20 L 50,80 L 45,80 L 25,55 L 25,80 L 20,80 Z" />
+        <path d="M 55,80 L 55,20 L 80,20 L 80,25 L 60,25 L 60,75 L 80,75 L 80,80 L 55,80 Z" />
       </g>
     </svg>
   );
