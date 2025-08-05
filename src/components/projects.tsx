@@ -62,18 +62,10 @@ export default function Projects() {
                 <motion.div
                   whileHover={{ scale: 1.03, y: -5 }}
                   transition={{ type: 'spring', stiffness: 300 }}
-                  style={{ transformStyle: 'preserve-3d', perspective: 1000 }}
                 >
-                  <Card className="group overflow-hidden transition-all duration-300 cursor-pointer bg-card/50 backdrop-blur-sm h-full flex flex-col">
+                  <Card className="group overflow-hidden transition-all duration-300 cursor-pointer bg-card/50 backdrop-blur-sm h-full flex flex-col border-2 border-transparent hover:border-primary/50">
                     <CardHeader className="p-0">
-                      <motion.div 
-                        className="aspect-video overflow-hidden"
-                        whileHover={{
-                          rotateY: 10,
-                          rotateX: -10,
-                          boxShadow: "0 20px 30px -10px hsla(var(--primary), 0.3)",
-                        }}
-                      >
+                      <div className="aspect-video overflow-hidden">
                         <Image
                           src={project.image}
                           alt={project.title}
@@ -82,10 +74,11 @@ export default function Projects() {
                           className="object-cover transition-transform duration-300 group-hover:scale-110"
                           data-ai-hint={project.imageHint}
                         />
-                      </motion.div>
+                      </div>
                     </CardHeader>
                     <CardContent className="p-6 flex-grow">
-                      <CardTitle className="font-headline text-xl mb-2">{project.title}</CardTitle>
+                      <CardTitle className="font-headline text-xl mb-2 group-hover:text-primary transition-colors">{project.title}</CardTitle>
+                       <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{project.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {project.techStack.map((tech) => (
                           <Badge key={tech} variant="secondary">{tech}</Badge>

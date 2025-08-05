@@ -8,10 +8,11 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary to-background animate-subtle-gradient bg-[size:400%_400%] dark:from-background dark:via-secondary/50 dark:to-background" />
-        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary/50 to-background" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
       </div>
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -22,7 +23,10 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <div className="w-40 h-40 rounded-full mb-6 overflow-hidden border-4 border-primary/50 shadow-lg">
+            <motion.div 
+              className="w-40 h-40 rounded-full mb-6 overflow-hidden border-4 border-primary/50 shadow-lg"
+              whileHover={{ scale: 1.05, rotate: 3 }}
+            >
               <Image
                 src="/profile.png"
                 alt="Kandula Naveen"
@@ -30,8 +34,9 @@ export default function Hero() {
                 height={160}
                 className="object-cover"
                 data-ai-hint="professional headshot"
+                priority
               />
-            </div>
+            </motion.div>
             <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
               Kandula Naveen
             </h1>
@@ -51,7 +56,7 @@ export default function Hero() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
               </Button>
-              <Button size="lg" variant="secondary" asChild>
+              <Button size="lg" variant="outline" asChild>
                 <a href="https://drive.google.com/file/d/1PwZ2CmF0lHIUJrRkc7_L-2VVfMoCoasU/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                   Download Resume
                   <Download className="ml-2 h-5 w-5" />
@@ -83,9 +88,9 @@ export default function Hero() {
                  transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }}
                  whileHover={{ rotateY: 15, rotateX: -15, scale: 1.05 }}
                >
-                 <div className="w-full h-full rounded-full bg-primary/10 flex items-center justify-center p-8 relative">
-                    <div className="w-full h-full rounded-full bg-primary/20 flex items-center justify-center p-8">
-                        <div className="w-full h-full rounded-full bg-primary/30 flex items-center justify-center p-8">
+                 <div className="w-full h-full rounded-full bg-primary/5 border border-primary/10 flex items-center justify-center p-8 relative shadow-2xl shadow-primary/10">
+                    <div className="w-full h-full rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center p-8">
+                        <div className="w-full h-full rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center p-8">
                            <BotIcon className="w-32 h-32 text-primary" />
                         </div>
                     </div>
