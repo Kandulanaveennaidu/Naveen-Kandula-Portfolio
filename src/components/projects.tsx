@@ -15,7 +15,7 @@ const projectsData = [
     image: "https://placehold.co/600x400.png",
     imageHint: "video conference interface",
     techStack: ["React", "WebRTC", "Node.js", "Socket.io"],
-    liveDemo: "https://vitelglobal.in/vitel-meet",
+    liveDemo: "https://customer.vitelmeet.com/",
   },
   {
     title: "ATTPL Group – Multi-Industry Business Solutions",
