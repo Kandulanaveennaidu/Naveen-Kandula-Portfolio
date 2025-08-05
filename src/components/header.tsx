@@ -15,7 +15,6 @@ const navItems = [
   { href: '#achievements', label: 'Achievements' },
   { href: '#testimonials', label: 'Testimonials' },
   { href: '#services', label: 'Services' },
-  { href: '#blog', label: 'Blog' },
   { href: '#contact', label: 'Contact' },
 ];
 

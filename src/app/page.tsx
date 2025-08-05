@@ -9,7 +9,6 @@ import Footer from '@/components/footer';
 import Achievements from '@/components/achievements';
 import Testimonials from '@/components/testimonials';
 import Services from '@/components/services';
-import Blog from '@/components/blog';
 
 export default function Home() {
   return (
@@ -24,7 +23,6 @@ export default function Home() {
         <Achievements />
         <Testimonials />
         <Services />
-        <Blog />
         <Contact />
       </main>
       <Footer />
