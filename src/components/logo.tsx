@@ -6,16 +6,10 @@ export default function Logo({ className }: { className?: string }) {
       className={cn(className)}
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      fill="currentColor"
     >
-      <path d="M25 25h12.5v50H25z" fill="currentColor" stroke="none" />
-      <path d="M42.5 50L62.5 25" />
-      <path d="M42.5 50l20 25" />
-      <path d="M62.5 25h12.5v50H62.5" fill="currentColor" stroke="none" />
+      <path d="M25 20 V 80 H 35 V 55 L 55 80 H 67 L 45 50 L 67 20 H 55 L 35 45 V 20 H 25 Z" />
+      <path d="M65 20 V 80 H 75 V 20 H 65 Z" />
     </svg>
   );
 }
