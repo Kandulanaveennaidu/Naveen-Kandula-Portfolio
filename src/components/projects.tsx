@@ -10,39 +10,39 @@ import { motion } from 'framer-motion';
 
 const projectsData = [
   {
-    title: "Omni-Channel Communication Platform",
-    description: "An advanced communication hub with integrated AI chatbot capabilities to streamline user interactions across multiple channels. The system intelligently routes conversations and automates responses.",
+    title: "VitelMeet – Video Conferencing Platform",
+    description: "A modern, reliable video conferencing solution designed for seamless virtual meetings and collaboration, developed for Vitel Global.",
     image: "https://placehold.co/600x400.png",
-    imageHint: "communication dashboard",
-    techStack: ["React", "Node.js", "AI Chatbot", "WebSocket"],
+    imageHint: "video conference interface",
+    techStack: ["React", "WebRTC", "Node.js", "Socket.io"],
+    liveDemo: "https://vitelglobal.in/vitel-meet",
+    githubRepo: "https://github.com/Kandulanaveennaidu"
+  },
+  {
+    title: "ATTPL Group – Multi-Industry Business Solutions",
+    description: "A comprehensive platform for a diversified business group, offering services in construction, finance, consultancy, solar energy, and IT.",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "corporate building portfolio",
+    techStack: ["React", "Node.js", "GraphQL", "MySQL"],
+    liveDemo: "http://attplgroup.com/",
+    githubRepo: "https://github.com/Kandulanaveennaidu"
+  },
+  {
+    title: "Calendit.ai – AI-Powered Meeting Scheduler",
+    description: "An intelligent scheduling tool powered by AI that simplifies booking meetings, similar in functionality to Calendly.",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "calendar schedule app",
+    techStack: ["React", "AI/NLP", "Node.js", "MongoDB"],
     liveDemo: "#",
     githubRepo: "https://github.com/Kandulanaveennaidu"
   },
   {
-    title: "AI-Enhanced Video Conferencing",
-    description: "A video conferencing solution enhanced with real-time machine learning features like background blur, noise cancellation, and automated transcription services for improved meeting productivity.",
+    title: "Vitel Global – OmniChannel Contact Center",
+    description: "A seamless omni-channel contact center solution that unifies customer engagement across multiple communication platforms.",
     image: "https://placehold.co/600x400.png",
-    imageHint: "video conference",
-    techStack: ["WebRTC", "Python", "TensorFlow", "React"],
-    liveDemo: "#",
-    githubRepo: "https://github.com/Kandulanaveennaidu"
-  },
-  {
-    title: "Intelligent Election Management",
-    description: "A comprehensive system for managing election processes, featuring predictive analytics for voter turnout, sentiment analysis on social media, and secure digital voting functionalities.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "analytics dashboard",
-    techStack: ["React", "Python", "Scikit-learn", "GraphQL"],
-    liveDemo: "#",
-    githubRepo: "https://github.com/Kandulanaveennaidu"
-  },
-  {
-    title: "Calendit.ai Scheduling Platform",
-    description: "An NLP-powered scheduling platform that allows users to book meetings using natural language. It understands complex requests and integrates with multiple calendar services.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "calendar schedule",
-    techStack: ["NLP", "React", "Node.js", "MongoDB"],
-    liveDemo: "#",
+    imageHint: "customer support dashboard",
+    techStack: ["React", "AI Chatbot", "WebSocket", "Redux"],
+    liveDemo: "https://vitelglobal.com/omni-channel-experience",
     githubRepo: "https://github.com/Kandulanaveennaidu"
   }
 ];
