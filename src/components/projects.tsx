@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Badge } from './ui/badge';
-import { Github, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const projectsData = [
@@ -16,7 +16,6 @@ const projectsData = [
     imageHint: "video conference interface",
     techStack: ["React", "WebRTC", "Node.js", "Socket.io"],
     liveDemo: "https://vitelglobal.in/vitel-meet",
-    githubRepo: "https://github.com/Kandulanaveennaidu"
   },
   {
     title: "ATTPL Group – Multi-Industry Business Solutions",
@@ -25,7 +24,6 @@ const projectsData = [
     imageHint: "corporate building portfolio",
     techStack: ["React", "Node.js", "GraphQL", "MySQL"],
     liveDemo: "http://attplgroup.com/",
-    githubRepo: "https://github.com/Kandulanaveennaidu"
   },
   {
     title: "Calendit.ai – AI-Powered Meeting Scheduler",
@@ -34,7 +32,6 @@ const projectsData = [
     imageHint: "calendar schedule app",
     techStack: ["React", "AI/NLP", "Node.js", "MongoDB"],
     liveDemo: "https://calendit.ai/",
-    githubRepo: "https://github.com/Kandulanaveennaidu"
   },
   {
     title: "Vitel Global – OmniChannel Contact Center",
@@ -43,7 +40,6 @@ const projectsData = [
     imageHint: "customer support dashboard",
     techStack: ["React", "AI Chatbot", "WebSocket", "Redux"],
     liveDemo: "https://vitelglobal.com/omni-channel-experience",
-    githubRepo: "https://github.com/Kandulanaveennaidu"
   }
 ];
 
@@ -112,11 +108,6 @@ export default function Projects() {
                   <Button asChild>
                     <a href={project.liveDemo} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-                    </a>
-                  </Button>
-                  <Button variant="secondary" asChild>
-                    <a href={project.githubRepo} target="_blank" rel="noopener noreferrer">
-                      <Github className="mr-2 h-4 w-4" /> GitHub
                     </a>
                   </Button>
                 </div>
