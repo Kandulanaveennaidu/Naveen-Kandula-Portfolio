@@ -12,7 +12,7 @@ const projectsData = [
   {
     title: "VitelMeet – Video Conferencing Platform",
     description: "A modern, reliable video conferencing solution designed for seamless virtual meetings and collaboration, developed for Vitel Global.",
-    image: "https://placehold.co/600x400.png",
+    image: "/vitelmeet.png",
     imageHint: "video conference interface",
     techStack: ["React", "WebRTC", "Node.js", "Socket.io"],
     liveDemo: "https://customer.vitelmeet.com/",
@@ -20,7 +20,7 @@ const projectsData = [
   {
     title: "ATTPL Group – Multi-Industry Business Solutions",
     description: "A comprehensive platform for a diversified business group, offering services in construction, finance, consultancy, solar energy, and IT.",
-    image: "https://placehold.co/600x400.png",
+    image: "/ATTPL.png",
     imageHint: "corporate building portfolio",
     techStack: ["React", "Node.js", "GraphQL", "MySQL"],
     liveDemo: "http://attplgroup.com/",
@@ -28,7 +28,7 @@ const projectsData = [
   {
     title: "Calendit.ai – AI-Powered Meeting Scheduler",
     description: "An intelligent scheduling tool powered by AI that simplifies booking meetings, similar in functionality to Calendly.",
-    image: "https://placehold.co/600x400.png",
+    image: "/Calendit.ai.png",
     imageHint: "calendar schedule app",
     techStack: ["React", "AI/NLP", "Node.js", "MongoDB"],
     liveDemo: "https://calendit.ai/",
@@ -36,7 +36,7 @@ const projectsData = [
   {
     title: "Vitel Global – OmniChannel Contact Center",
     description: "A seamless omni-channel contact center solution that unifies customer engagement across multiple communication platforms.",
-    image: "https://placehold.co/600x400.png",
+    image: "/Omini_Channels.png",
     imageHint: "customer support dashboard",
     techStack: ["React", "AI Chatbot", "WebSocket", "Redux"],
     liveDemo: "https://vitelglobal.com/omni-channel-experience",

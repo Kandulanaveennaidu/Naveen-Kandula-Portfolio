@@ -28,7 +28,7 @@ export default function Hero() {
               whileHover={{ scale: 1.05, rotate: 3 }}
             >
               <Image
-                src="/profile.png"
+                src="/Image.jfif"
                 alt="Kandula Naveen"
                 width={160}
                 height={160}

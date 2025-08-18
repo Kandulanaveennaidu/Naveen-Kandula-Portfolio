@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import AnimatedCounter from './animated-counter';
 import { BarChart, Bot, Briefcase, Smile } from 'lucide-react';
 
-const professionalSummary = "Innovative Full Stack Developer with 2.7+ years of experience transforming traditional applications into intelligent AI-driven solutions. Specialized in bridging complex AI technologies with user-friendly interfaces through chatbot development, conversational AI, and smart automation systems.";
+const professionalSummary = "Innovative Full Stack Developer with 3+ years of experience transforming traditional applications into intelligent AI-driven solutions. Specialized in bridging complex AI technologies with user-friendly interfaces through chatbot development, conversational AI, and smart automation systems.";
 
 const keyMetrics = [
   { value: 40, label: "User Engagement", suffix: "%+", icon: <BarChart className="w-8 h-8 text-primary" /> },
