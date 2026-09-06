@@ -88,16 +88,32 @@ export default function ProjectCaseStudyPage({ params }: PageProps) {
         {/* Header Hero Box */}
         <header className="p-8 sm:p-12 rounded-2xl bg-bg-card/70 border border-border-strong mb-10 relative overflow-hidden shadow-elevated">
           <div className="relative z-10">
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              <Badge variant="cyan" size="sm">
-                {project.category}
-              </Badge>
-              <Badge variant="outline" size="sm">
-                {project.timeline}
-              </Badge>
-              <span className="text-xs font-mono text-text-muted">
-                Role: {project.role}
-              </span>
+            {/* Engineer Identity & Categories */}
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-border-subtle">
+              <div className="flex items-center gap-3">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-accent-primary/40 shrink-0 bg-bg-card">
+                  <Image
+                    src="/images/naveen-profile.jpg"
+                    alt="Naveen Kandula"
+                    fill
+                    sizes="40px"
+                    className="object-cover object-top"
+                  />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-text-primary">Naveen Kandula</div>
+                  <div className="text-[11px] font-mono text-accent-cyan">Role: {project.role}</div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="cyan" size="sm">
+                  {project.category}
+                </Badge>
+                <Badge variant="outline" size="sm">
+                  {project.timeline}
+                </Badge>
+              </div>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-text-primary tracking-tight leading-tight mb-4">

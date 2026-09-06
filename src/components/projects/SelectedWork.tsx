@@ -12,17 +12,44 @@ export default function SelectedWork() {
   return (
     <section id="work" className="py-24 sm:py-32 border-b border-border-subtle bg-bg-primary w-full" aria-label="Selected Work">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16 sm:mb-24">
-          <div className="text-xs font-mono uppercase tracking-widest text-accent-cyan mb-3">
-            01 // PROVEN TRACK RECORD
+        {/* Section Header with Architect Signature */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 sm:mb-24 pb-8 border-b border-border-subtle">
+          <div className="max-w-2xl">
+            <div className="text-xs font-mono uppercase tracking-widest text-accent-cyan mb-3">
+              01 // PROVEN TRACK RECORD
+            </div>
+            <h2 className="text-fluid-section font-bold tracking-tighter text-text-primary mb-3">
+              Selected Work &amp; Case Studies
+            </h2>
+            <p className="text-base sm:text-lg text-text-secondary leading-relaxed font-normal">
+              A selection of production systems, software applications, and AI integrations I&apos;ve engineered for businesses, startups, and enterprise operations.
+            </p>
           </div>
-          <h2 className="text-fluid-section font-bold tracking-tighter text-text-primary mb-4">
-            Selected Work
-          </h2>
-          <p className="text-base sm:text-lg text-text-secondary leading-relaxed font-normal">
-            A selection of production systems, software applications, and AI integrations I&apos;ve engineered for businesses, startups, and enterprise operations.
-          </p>
+
+          {/* Lead Engineer Signature Badge with Photo */}
+          <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/[0.03] border border-border-strong shrink-0 shadow-sm">
+            <div className="relative w-12 h-12 rounded-xl overflow-hidden border border-accent-primary/40 shrink-0 bg-bg-card">
+              <Image
+                src="/images/naveen-profile.jpg"
+                alt="Naveen Kandula — Lead Engineer & Architect"
+                fill
+                sizes="48px"
+                className="object-cover object-top"
+              />
+            </div>
+            <div className="text-left">
+              <span className="text-xs font-bold text-text-primary block leading-tight">
+                Naveen Kandula
+              </span>
+              <span className="text-[11px] font-mono text-accent-cyan block">
+                Lead Engineer &amp; Architect
+              </span>
+              <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1 mt-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Verified Production Work
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* Editorial Project Showcases (One per block, immersive visual space) */}
@@ -135,8 +162,39 @@ export default function SelectedWork() {
           })}
         </div>
 
+        {/* Architect Commitment Banner with Photo */}
+        <div className="mt-24 p-6 sm:p-8 rounded-2xl border border-border-strong bg-white/[0.02] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <div className="relative w-14 h-14 rounded-2xl overflow-hidden border border-border-strong shrink-0 bg-bg-card shadow-md">
+              <Image
+                src="/images/naveen-profile.jpg"
+                alt="Naveen Kandula"
+                fill
+                sizes="56px"
+                className="object-cover object-top"
+              />
+            </div>
+            <div>
+              <div className="text-sm font-bold text-text-primary">
+                Every project above was engineered with end-to-end production rigor.
+              </div>
+              <p className="text-xs text-text-secondary mt-0.5">
+                Have a similar challenge or need high-velocity development? Let&apos;s discuss architecture and timeline.
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href="/#contact"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-text-primary text-bg-primary hover:bg-white text-xs font-mono uppercase tracking-wider font-semibold transition-all shrink-0 min-h-[44px]"
+          >
+            <span>Discuss Your Project</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+
         {/* Link to all projects archive */}
-        <div className="mt-20 pt-12 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-8 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs font-mono text-text-muted">
             Looking for more architecture examples and technical breakdowns?
           </p>
