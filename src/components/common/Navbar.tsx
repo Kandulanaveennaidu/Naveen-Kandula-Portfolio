@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight, Code2, Sparkles, MessageSquare } from "lucide-react";
 import Button from "./Button";
@@ -78,15 +79,21 @@ export default function Navbar() {
               : "bg-transparent border border-transparent"
           )}
         >
-          {/* Brand Logo */}
+          {/* Brand Logo with Profile Avatar */}
           <Link
             href="/"
             onClick={closeMobileMenu}
-            className="flex items-center gap-2 group focus:outline-none min-h-[44px] py-1"
+            className="flex items-center gap-2.5 group focus:outline-none min-h-[44px] py-1"
             aria-label="Naveen Kandula Home"
           >
-            <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-border-subtle flex items-center justify-center text-accent-primary group-hover:border-accent-primary/40 group-hover:bg-accent-primary/10 transition-all duration-300">
-              <Code2 className="w-4 h-4" />
+            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-accent-primary/40 shadow-sm group-hover:border-accent-cyan transition-all duration-300 shrink-0 bg-bg-elevated">
+              <Image
+                src="/images/naveen-profile.jpg"
+                alt="Naveen Kandula"
+                fill
+                sizes="32px"
+                className="object-cover object-top"
+              />
             </div>
             <span className="font-bold tracking-tight text-base sm:text-lg text-text-primary group-hover:text-white transition-colors">
               NAVEEN<span className="text-accent-primary">.</span>
@@ -152,7 +159,25 @@ export default function Navbar() {
         >
           {/* Navigation Links */}
           <div className="flex flex-col gap-2 my-auto max-w-sm w-full mx-auto">
-            <div className="text-[11px] font-mono uppercase tracking-widest text-accent-cyan mb-2">
+            {/* Founder Profile Card inside Mobile Drawer */}
+            <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] mb-3">
+              <div className="relative w-12 h-12 rounded-xl overflow-hidden border border-accent-primary/40 shrink-0 bg-bg-elevated shadow-md">
+                <Image
+                  src="/images/naveen-profile.jpg"
+                  alt="Naveen Kandula"
+                  fill
+                  sizes="48px"
+                  className="object-cover object-top"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-bold text-text-primary truncate">Naveen Kandula</div>
+                <div className="text-[11px] font-mono text-accent-cyan truncate">Full Stack & AI Engineer</div>
+              </div>
+              <span className="w-2 h-2 rounded-full bg-accent-success shrink-0 animate-pulse" title="Available for hire" />
+            </div>
+
+            <div className="text-[11px] font-mono uppercase tracking-widest text-accent-cyan mb-1">
               Navigation Menu
             </div>
 

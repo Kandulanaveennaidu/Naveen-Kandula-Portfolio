@@ -33,7 +33,7 @@ export default function ProfileImage({ className, priority = false }: ProfileIma
             fill
             priority={priority}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 420px"
-            className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
             onError={() => setImageError(true)}
           />
         ) : (
