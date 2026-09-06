@@ -86,12 +86,7 @@ export default function ProjectCaseStudyPage({ params }: PageProps) {
       {/* Case Study Main Article */}
       <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Hero Box */}
-        <header className="p-8 sm:p-12 rounded-3xl bg-bg-card border border-border-subtle mb-10 relative overflow-hidden shadow-2xl">
-          <div 
-            className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-15 pointer-events-none"
-            style={{ backgroundColor: project.visual.accentColor }}
-          />
-
+        <header className="p-8 sm:p-12 rounded-2xl bg-bg-card/70 border border-border-strong mb-10 relative overflow-hidden shadow-elevated">
           <div className="relative z-10">
             <div className="flex flex-wrap items-center gap-3 mb-4">
               <Badge variant="cyan" size="sm">

@@ -10,44 +10,37 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          primary: "#08090B",
-          secondary: "#0E1014",
-          card: "#12151A",
-          elevated: "#171A21",
+          primary: "var(--bg-primary)",
+          secondary: "var(--bg-secondary)",
+          card: "var(--bg-card)",
+          elevated: "var(--bg-elevated)",
         },
         text: {
-          primary: "#F5F7FA",
-          secondary: "#A7AFBD",
-          muted: "#737B89",
+          primary: "var(--text-primary)",
+          secondary: "var(--text-secondary)",
+          muted: "var(--text-muted)",
         },
         accent: {
-          primary: "#7C5CFF",
-          cyan: "#22D3EE",
-          success: "#22C55E",
+          primary: "var(--accent-primary)",
+          cyan: "var(--accent-cyan)",
+          success: "var(--accent-success)",
         },
         border: {
-          subtle: "rgba(255, 255, 255, 0.08)",
-          glow: "rgba(124, 92, 255, 0.25)",
+          subtle: "var(--border-subtle)",
+          strong: "var(--border-strong)",
         }
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
         mono: ["var(--font-jetbrains)", "monospace"],
       },
-      animation: {
-        'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'float-slow': 'float 6s ease-in-out infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-8px)' },
-        }
+      letterSpacing: {
+        tighter: "-0.04em",
+        tight: "-0.02em",
       },
       boxShadow: {
-        'card-glow': '0 0 35px -5px rgba(124, 92, 255, 0.12)',
-        'accent-glow': '0 0 25px rgba(124, 92, 255, 0.3)',
-        'cyan-glow': '0 0 25px rgba(34, 211, 238, 0.25)',
+        'subtle': '0 4px 20px -2px rgba(0, 0, 0, 0.5)',
+        'elevated': '0 12px 32px -4px rgba(0, 0, 0, 0.65)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

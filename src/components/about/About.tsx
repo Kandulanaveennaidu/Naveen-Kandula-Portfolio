@@ -1,95 +1,136 @@
 "use client";
 
 import React from "react";
-import SectionHeader from "@/components/common/SectionHeader";
-import ProfileImage from "@/components/common/ProfileImage";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight, Check, MapPin, Sparkles, Terminal } from "lucide-react";
 import { profileData } from "@/data/profile";
-import { ArrowRight, CheckCircle2, Workflow } from "lucide-react";
-import Button from "@/components/common/Button";
-
-const LIFECYCLE_STAGES = [
-  "Idea & Scope",
-  "Architecture",
-  "Development",
-  "Integration",
-  "Hardening",
-  "Launch & Ops",
-];
 
 export default function About() {
   return (
-    <section id="about" className="py-14 sm:py-20 md:py-32 relative bg-bg-primary w-full" aria-label="About Naveen Kandula">
+    <section id="about" className="py-24 sm:py-32 border-b border-border-subtle bg-bg-secondary/40 w-full" aria-label="About Naveen Kandula">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          eyebrow="01 // PHILOSOPHY & PROFILE"
-          title={profileData.bio.aboutLead}
-          description="I bridge technical architecture with tangible business results, ensuring every line of code serves your product goals."
-        />
-
-        {/* Lifecycle Flow Ribbon: 2-col on mobile, 3-col on tablet, 6-col on desktop */}
-        <div className="mb-10 sm:mb-16 p-4 sm:p-6 rounded-2xl bg-bg-card border border-border-subtle">
-          <div className="text-[11px] sm:text-xs font-mono text-text-muted uppercase tracking-wider mb-3 sm:mb-4 flex items-center gap-2">
-            <Workflow className="w-4 h-4 text-accent-cyan shrink-0" />
-            <span>End-to-End Product Lifecycle Ownership</span>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
-            {LIFECYCLE_STAGES.map((stage, idx) => (
-              <div
-                key={stage}
-                className="p-3 rounded-xl bg-white/[0.02] border border-border-subtle flex flex-col justify-between min-h-[64px]"
-              >
-                <span className="text-[10px] font-mono text-accent-cyan">0{idx + 1}</span>
-                <span className="text-xs sm:text-sm font-medium text-text-primary mt-1">{stage}</span>
-              </div>
-            ))}
-          </div>
+        {/* Section Tag */}
+        <div className="text-xs font-mono uppercase tracking-widest text-accent-cyan mb-4">
+          06 // THE ENGINEER BEHIND THE WORK
         </div>
 
-        {/* Mobile Single-Column Stack, Desktop Two-Column */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Professional Narrative & Principles (Top on Mobile) */}
-          <div className="lg:col-span-7 order-1 flex flex-col justify-center">
-            <div className="space-y-4 text-text-secondary text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
-              {profileData.bio.aboutStory.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
+        {/* Editorial 2-Column Composition (Desktop) / Stacked (Mobile) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Column: Large Editorial Portrait (5 Cols) */}
+          <div className="lg:col-span-5">
+            <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden border border-border-strong bg-bg-card shadow-elevated group">
+              <Image
+                src="/images/naveen-profile.jpg"
+                alt={`${profileData.name} — Full Stack Developer & AI Integration Engineer`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 460px"
+                priority
+                className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+              />
+
+              {/* Minimal caption ribbon */}
+              <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-between text-xs font-mono">
+                <span className="text-text-primary font-semibold">{profileData.name}</span>
+                <span className="text-emerald-400 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  Available for Hire
+                </span>
+              </div>
             </div>
 
-            {/* Operating Principles Cards: 1-col on mobile, 2-col on sm+ */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-              {profileData.bio.operatingPrinciples.map((principle) => (
-                <div
-                  key={principle.title}
-                  className="p-4 rounded-xl bg-bg-card border border-border-subtle hover:border-white/20 transition-colors"
-                >
-                  <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-text-primary mb-1">
-                    <CheckCircle2 className="w-4 h-4 text-accent-primary shrink-0" />
-                    <span>{principle.title}</span>
-                  </div>
-                  <p className="text-xs text-text-muted leading-relaxed">
-                    {principle.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div>
-              <Button 
-                href="/services" 
-                variant="outline" 
-                size="md" 
-                className="w-full sm:w-auto justify-center min-h-[44px]"
-                icon={<ArrowRight className="w-4 h-4" />}
-              >
-                Explore Capabilities & Services
-              </Button>
+            {/* Micro Details under Photo */}
+            <div className="mt-4 p-4 rounded-xl bg-black/40 border border-border-subtle grid grid-cols-2 gap-3 text-xs font-mono">
+              <div>
+                <span className="text-text-muted block text-[10px] uppercase">Experience</span>
+                <span className="text-text-primary font-semibold">4+ Years Active</span>
+              </div>
+              <div>
+                <span className="text-text-muted block text-[10px] uppercase">Focus</span>
+                <span className="text-accent-cyan font-semibold">Full Stack &amp; AI</span>
+              </div>
             </div>
           </div>
 
-          {/* Profile Photo Card (Order 2 on Mobile, Centered) */}
-          <div className="lg:col-span-5 order-2 flex justify-center w-full max-w-[320px] sm:max-w-[380px] mx-auto">
-            <ProfileImage />
+          {/* Right Column: Engineering Philosophy & Approach (7 Cols) */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            <h2 className="text-fluid-section font-bold tracking-tighter text-text-primary mb-6">
+              Engineering is more than writing code.
+            </h2>
+
+            <div className="space-y-4 text-text-secondary text-base sm:text-lg leading-relaxed mb-8 font-normal">
+              <p>
+                Too many software projects fail not because the code was bad, but because nobody took the time to deeply understand what was actually needed.
+              </p>
+              <p>
+                I partner with businesses, early-stage founders, and product teams to bridge the gap between abstract requirements and finished, high-performing software products.
+              </p>
+              <p>
+                From designing intuitive user experiences to constructing fault-tolerant backend architectures and embedding deterministic AI workflows, I take end-to-end ownership of every milestone.
+              </p>
+            </div>
+
+            {/* Operating Principles Minimal List */}
+            <div className="space-y-4 mb-10 pb-8 border-b border-border-subtle">
+              <div className="text-xs font-mono text-text-muted uppercase tracking-wider">
+                Operating Principles
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+                <div className="p-3.5 rounded-xl bg-white/[0.02] border border-border-subtle flex items-start gap-2.5">
+                  <Check className="w-4 h-4 text-accent-cyan shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-text-primary block font-sans text-sm mb-0.5">Solve the Real Problem</strong>
+                    <span className="text-text-muted font-sans">Never over-engineer when a simpler, faster architecture delivers 10x value.</span>
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-white/[0.02] border border-border-subtle flex items-start gap-2.5">
+                  <Check className="w-4 h-4 text-accent-cyan shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-text-primary block font-sans text-sm mb-0.5">Ship Working Software</strong>
+                    <span className="text-text-muted font-sans">Frequent testable milestones instead of months of silent development.</span>
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-white/[0.02] border border-border-subtle flex items-start gap-2.5">
+                  <Check className="w-4 h-4 text-accent-cyan shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-text-primary block font-sans text-sm mb-0.5">Pragmatic AI Integration</strong>
+                    <span className="text-text-muted font-sans">Embed AI where it creates leverage, not where it adds unreliable noise.</span>
+                  </div>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-white/[0.02] border border-border-subtle flex items-start gap-2.5">
+                  <Check className="w-4 h-4 text-accent-cyan shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-text-primary block font-sans text-sm mb-0.5">Transparent Communication</strong>
+                    <span className="text-text-muted font-sans">Clear timelines, proactive risk alerts, and zero corporate jargon.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Direct Contact Links */}
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/#contact"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-text-primary text-bg-primary hover:bg-white text-xs font-mono uppercase tracking-wider font-semibold transition-all shadow-sm"
+              >
+                <span>Work With Naveen</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+
+              <a
+                href="https://wa.me/919705627977"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-text-secondary hover:text-text-primary transition-colors py-2 px-3"
+              >
+                <span>WhatsApp: +91 9705627977</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-accent-cyan" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

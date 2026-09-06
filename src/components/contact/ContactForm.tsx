@@ -1,23 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import Button from "@/components/common/Button";
-import { CheckCircle2, Send, Loader2, RefreshCw, MessageSquare } from "lucide-react";
+import { CheckCircle2, Send, Loader2, ArrowUpRight, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const PROJECT_TYPES = [
   "Full-Stack Web App",
-  "AI Integration / LLM Feature",
-  "Backend & API Development",
-  "Existing Product Enhancement",
-  "Custom Business Tool / CRM",
-  "Architecture Consultation"
+  "AI Integration & LLM Pipeline",
+  "Backend & API Architecture",
+  "Product Modernization / Scaling",
+  "Custom Business Tool",
+  "Technical Consultation"
 ];
 
-const PREFERRED_CONTACT_METHODS = ["Email", "WhatsApp", "Phone Call"];
-
 const BUDGET_RANGES = [
-  "Flexible / Scoped on Brief",
+  "Flexible / Scoped on Requirements",
   "< $5,000",
   "$5,000 - $15,000",
   "$15,000 - $30,000",
@@ -25,10 +22,10 @@ const BUDGET_RANGES = [
 ];
 
 const TIMELINE_OPTIONS = [
-  "Immediately (< 2 weeks)",
+  "Urgent (< 2 weeks)",
   "Within 1 month",
   "Within 2 - 3 months",
-  "Flexible / Long-term"
+  "Flexible"
 ];
 
 export default function ContactForm() {
@@ -38,7 +35,7 @@ export default function ContactForm() {
     company: "",
     phone: "",
     projectType: PROJECT_TYPES[0],
-    preferredContact: PREFERRED_CONTACT_METHODS[0],
+    preferredContact: "Email",
     budget: BUDGET_RANGES[0],
     timeline: TIMELINE_OPTIONS[0],
     message: "",
@@ -62,272 +59,254 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || "Failed to submit inquiry.");
+        throw new Error(data.error || "Failed to submit project inquiry.");
       }
 
-      setInquiryId(result.inquiryId || null);
       setSubmitted(true);
+      setInquiryId(data.inquiryId);
     } catch (err: any) {
-      setErrorMessage(err.message || "An unexpected error occurred while saving your inquiry. Please try again or reach out on WhatsApp directly.");
+      setErrorMessage(err.message || "An unexpected error occurred. Please contact me directly via WhatsApp or email.");
     } finally {
       setLoading(false);
     }
   };
 
-  const resetForm = () => {
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      phone: "",
-      projectType: PROJECT_TYPES[0],
-      preferredContact: PREFERRED_CONTACT_METHODS[0],
-      budget: BUDGET_RANGES[0],
-      timeline: TIMELINE_OPTIONS[0],
-      message: "",
-      honeypot: "",
-    });
-    setSubmitted(false);
-    setErrorMessage(null);
-  };
-
   if (submitted) {
     return (
-      <div className="p-6 sm:p-10 md:p-12 rounded-3xl bg-bg-card border border-accent-success/30 shadow-2xl text-center flex flex-col items-center justify-center animate-in fade-in zoom-in-95 duration-300">
-        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-accent-success/15 border border-accent-success/30 flex items-center justify-center text-accent-success mb-4 sm:mb-5 shadow-lg">
-          <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8" />
+      <div className="p-8 sm:p-12 rounded-2xl border border-border-strong bg-bg-card text-left space-y-6">
+        <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+          <CheckCircle2 className="w-6 h-6" />
         </div>
-        <h3 className="text-xl sm:text-2xl font-bold text-text-primary tracking-tight mb-2">
-          Your project inquiry is on its way.
-        </h3>
-        <p className="text-xs sm:text-sm text-text-secondary leading-relaxed max-w-md mb-4 px-2">
-          Thanks for sharing the details. Your inquiry has been stored in PostgreSQL and a notification has been sent to Naveen. You will receive a direct reply at <span className="text-text-primary font-medium">{formData.email}</span> within 24 hours.
-        </p>
+
+        <div>
+          <h3 className="text-2xl font-bold tracking-tight text-text-primary mb-2">
+            Project Brief Received
+          </h3>
+          <p className="text-sm text-text-secondary leading-relaxed font-normal">
+            Thank you for reaching out. Your inquiry has been stored directly in PostgreSQL and dispatched to my inbox. I will review your requirements and respond within 24 hours.
+          </p>
+        </div>
+
         {inquiryId && (
-          <div className="text-[11px] font-mono text-text-muted bg-white/[0.03] px-3 py-1.5 rounded-lg border border-white/[0.06] mb-6">
-            Inquiry Reference: {inquiryId}
+          <div className="p-3.5 rounded-xl bg-black/40 border border-border-subtle font-mono text-xs text-text-muted">
+            <span>Reference ID: </span>
+            <strong className="text-text-primary font-normal">{inquiryId}</strong>
           </div>
         )}
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto">
-          <button
-            type="button"
-            onClick={resetForm}
-            className="inline-flex items-center justify-center gap-2 text-xs font-mono text-text-muted hover:text-text-primary transition-colors py-3 px-4 rounded-xl border border-border-subtle min-h-[44px]"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-            <span>Send Another Inquiry</span>
-          </button>
+        <div className="pt-4 border-t border-border-subtle flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <a
             href="https://wa.me/919705627977"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 text-xs font-mono text-accent-cyan hover:underline py-3 px-4 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20 min-h-[44px]"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-mono uppercase tracking-wider transition-all min-h-[44px]"
           >
-            <MessageSquare className="w-3.5 h-3.5" />
-            <span>Message on WhatsApp Directly</span>
+            <MessageSquare className="w-4 h-4" />
+            <span>Quick Chat on WhatsApp</span>
           </a>
+
+          <button
+            type="button"
+            onClick={() => {
+              setSubmitted(false);
+              setFormData({
+                name: "",
+                email: "",
+                company: "",
+                phone: "",
+                projectType: PROJECT_TYPES[0],
+                preferredContact: "Email",
+                budget: BUDGET_RANGES[0],
+                timeline: TIMELINE_OPTIONS[0],
+                message: "",
+                honeypot: "",
+              });
+            }}
+            className="px-4 py-3 rounded-xl border border-border-subtle text-text-muted hover:text-text-primary text-xs font-mono uppercase tracking-wider transition-colors min-h-[44px]"
+          >
+            Submit Another Inquiry
+          </button>
         </div>
       </div>
     );
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="p-5 sm:p-8 rounded-3xl bg-bg-card border border-border-subtle shadow-2xl flex flex-col gap-4 sm:gap-5 w-full"
-    >
-      {/* Hidden honeypot field to drop spam bots quietly */}
+    <form onSubmit={handleSubmit} className="p-6 sm:p-10 rounded-2xl border border-border-strong bg-bg-card/50 space-y-5">
+      {/* Honeypot Spam Trap (Hidden) */}
       <input
         type="text"
         name="company_website_url_hp"
         value={formData.honeypot}
         onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
-        className="hidden"
         tabIndex={-1}
         autoComplete="off"
+        className="hidden"
       />
 
       {errorMessage && (
-        <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-mono">
+        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-xs text-red-300">
           {errorMessage}
         </div>
       )}
 
-      {/* Field: Name */}
-      <div className="w-full">
-        <label htmlFor="name" className="block text-xs font-mono text-text-muted uppercase mb-1.5">
-          Full Name <span className="text-accent-primary">*</span>
-        </label>
-        <input
-          id="name"
-          type="text"
-          required
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          placeholder="e.g. Alex Rivera"
-          className="w-full px-4 py-3 rounded-xl bg-bg-elevated border border-border-subtle focus:border-accent-primary text-base sm:text-sm text-text-primary placeholder:text-text-muted/60 focus:outline-none min-h-[48px] transition-colors"
-        />
+      {/* Row 1: Name & Email */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-mono uppercase text-text-muted mb-1.5">
+            Your Name <span className="text-accent-primary">*</span>
+          </label>
+          <input
+            type="text"
+            required
+            placeholder="e.g. Alex Miller"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className="w-full px-4 py-3 rounded-xl bg-black/40 border border-border-strong text-text-primary text-sm focus:border-accent-primary focus:outline-none min-h-[48px]"
+          />
+        </div>
+
+        <div>
+          <label className="block text-xs font-mono uppercase text-text-muted mb-1.5">
+            Work Email <span className="text-accent-primary">*</span>
+          </label>
+          <input
+            type="email"
+            required
+            placeholder="alex@company.com"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className="w-full px-4 py-3 rounded-xl bg-black/40 border border-border-strong text-text-primary text-sm focus:border-accent-primary focus:outline-none min-h-[48px]"
+          />
+        </div>
       </div>
 
-      {/* Field: Email */}
-      <div className="w-full">
-        <label htmlFor="email" className="block text-xs font-mono text-text-muted uppercase mb-1.5">
-          Email Address <span className="text-accent-primary">*</span>
-        </label>
-        <input
-          id="email"
-          type="email"
-          required
-          autoComplete="email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          placeholder="alex@company.com"
-          className="w-full px-4 py-3 rounded-xl bg-bg-elevated border border-border-subtle focus:border-accent-primary text-base sm:text-sm text-text-primary placeholder:text-text-muted/60 focus:outline-none min-h-[48px] transition-colors"
-        />
+      {/* Row 2: Company & Phone/WhatsApp */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-mono uppercase text-text-muted mb-1.5">
+            Company / Organization
+          </label>
+          <input
+            type="text"
+            placeholder="e.g. Acme Corp / Stealth"
+            value={formData.company}
+            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+            className="w-full px-4 py-3 rounded-xl bg-black/40 border border-border-strong text-text-primary text-sm focus:border-accent-primary focus:outline-none min-h-[48px]"
+          />
+        </div>
+
+        <div>
+          <label className="block text-xs font-mono uppercase text-text-muted mb-1.5">
+            Phone / WhatsApp
+          </label>
+          <input
+            type="tel"
+            placeholder="+1 (555) 000-0000"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            className="w-full px-4 py-3 rounded-xl bg-black/40 border border-border-strong text-text-primary text-sm focus:border-accent-primary focus:outline-none min-h-[48px]"
+          />
+        </div>
       </div>
 
-      {/* Field: Company */}
-      <div className="w-full">
-        <label htmlFor="company" className="block text-xs font-mono text-text-muted uppercase mb-1.5">
-          Company or Product Name <span className="text-text-muted font-normal">(Optional)</span>
-        </label>
-        <input
-          id="company"
-          type="text"
-          value={formData.company}
-          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-          placeholder="e.g. Acme Tech or Early Stage Startup"
-          className="w-full px-4 py-3 rounded-xl bg-bg-elevated border border-border-subtle focus:border-accent-primary text-base sm:text-sm text-text-primary placeholder:text-text-muted/60 focus:outline-none min-h-[48px] transition-colors"
-        />
-      </div>
-
-      {/* Field: Phone / WhatsApp */}
-      <div className="w-full">
-        <label htmlFor="phone" className="block text-xs font-mono text-text-muted uppercase mb-1.5">
-          Phone / WhatsApp <span className="text-text-muted font-normal">(Optional)</span>
-        </label>
-        <input
-          id="phone"
-          type="tel"
-          autoComplete="tel"
-          value={formData.phone}
-          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-          placeholder="+1 (555) 000-0000"
-          className="w-full px-4 py-3 rounded-xl bg-bg-elevated border border-border-subtle focus:border-accent-primary text-base sm:text-sm text-text-primary placeholder:text-text-muted/60 focus:outline-none min-h-[48px] transition-colors"
-        />
-      </div>
-
-      {/* Field: Project Type */}
-      <div className="w-full">
-        <label htmlFor="projectType" className="block text-xs font-mono text-text-muted uppercase mb-1.5">
-          Project Category <span className="text-accent-primary">*</span>
+      {/* Row 3: Project Type */}
+      <div>
+        <label className="block text-xs font-mono uppercase text-text-muted mb-1.5">
+          Project Type <span className="text-accent-primary">*</span>
         </label>
         <select
-          id="projectType"
           value={formData.projectType}
           onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-          className="w-full px-4 py-3 rounded-xl bg-bg-elevated border border-border-subtle focus:border-accent-primary text-base sm:text-sm text-text-primary focus:outline-none min-h-[48px] transition-colors cursor-pointer"
+          className="w-full px-4 py-3 rounded-xl bg-black/40 border border-border-strong text-text-primary text-sm focus:border-accent-primary focus:outline-none min-h-[48px]"
         >
-          {PROJECT_TYPES.map((type) => (
-            <option key={type} value={type} className="bg-bg-card text-text-primary">
-              {type}
+          {PROJECT_TYPES.map((pt) => (
+            <option key={pt} value={pt} className="bg-bg-card text-text-primary">
+              {pt}
             </option>
           ))}
         </select>
       </div>
 
-      {/* Field: Preferred Contact Method */}
-      <div className="w-full">
-        <label htmlFor="preferredContact" className="block text-xs font-mono text-text-muted uppercase mb-1.5">
-          Preferred Contact Method
-        </label>
-        <select
-          id="preferredContact"
-          value={formData.preferredContact}
-          onChange={(e) => setFormData({ ...formData, preferredContact: e.target.value })}
-          className="w-full px-4 py-3 rounded-xl bg-bg-elevated border border-border-subtle focus:border-accent-primary text-base sm:text-sm text-text-primary focus:outline-none min-h-[48px] transition-colors cursor-pointer"
-        >
-          {PREFERRED_CONTACT_METHODS.map((method) => (
-            <option key={method} value={method} className="bg-bg-card text-text-primary">
-              {method}
-            </option>
-          ))}
-        </select>
+      {/* Row 4: Budget & Timeline */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-mono uppercase text-text-muted mb-1.5">
+            Budget Range
+          </label>
+          <select
+            value={formData.budget}
+            onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+            className="w-full px-4 py-3 rounded-xl bg-black/40 border border-border-strong text-text-primary text-sm focus:border-accent-primary focus:outline-none min-h-[48px]"
+          >
+            {BUDGET_RANGES.map((b) => (
+              <option key={b} value={b} className="bg-bg-card text-text-primary">
+                {b}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-xs font-mono uppercase text-text-muted mb-1.5">
+            Target Timeline
+          </label>
+          <select
+            value={formData.timeline}
+            onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
+            className="w-full px-4 py-3 rounded-xl bg-black/40 border border-border-strong text-text-primary text-sm focus:border-accent-primary focus:outline-none min-h-[48px]"
+          >
+            {TIMELINE_OPTIONS.map((t) => (
+              <option key={t} value={t} className="bg-bg-card text-text-primary">
+                {t}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      {/* Field: Budget Range */}
-      <div className="w-full">
-        <label htmlFor="budget" className="block text-xs font-mono text-text-muted uppercase mb-1.5">
-          Budget Range <span className="text-text-muted font-normal">(Optional)</span>
-        </label>
-        <select
-          id="budget"
-          value={formData.budget}
-          onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-          className="w-full px-4 py-3 rounded-xl bg-bg-elevated border border-border-subtle focus:border-accent-primary text-base sm:text-sm text-text-primary focus:outline-none min-h-[48px] transition-colors cursor-pointer"
-        >
-          {BUDGET_RANGES.map((b) => (
-            <option key={b} value={b} className="bg-bg-card text-text-primary">
-              {b}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Field: Timeline */}
-      <div className="w-full">
-        <label htmlFor="timeline" className="block text-xs font-mono text-text-muted uppercase mb-1.5">
-          Target Timeline <span className="text-text-muted font-normal">(Optional)</span>
-        </label>
-        <select
-          id="timeline"
-          value={formData.timeline}
-          onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-          className="w-full px-4 py-3 rounded-xl bg-bg-elevated border border-border-subtle focus:border-accent-primary text-base sm:text-sm text-text-primary focus:outline-none min-h-[48px] transition-colors cursor-pointer"
-        >
-          {TIMELINE_OPTIONS.map((t) => (
-            <option key={t} value={t} className="bg-bg-card text-text-primary">
-              {t}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Field: Project Description */}
-      <div className="w-full">
-        <label htmlFor="message" className="block text-xs font-mono text-text-muted uppercase mb-1.5">
-          Project Brief & Objectives <span className="text-accent-primary">*</span>
+      {/* Row 5: Project Brief */}
+      <div>
+        <label className="block text-xs font-mono uppercase text-text-muted mb-1.5">
+          Project Scope &amp; Requirements <span className="text-accent-primary">*</span>
         </label>
         <textarea
-          id="message"
           required
           rows={4}
+          placeholder="Briefly describe what you want to build, existing systems, or key technical challenges..."
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          placeholder="Describe what you are building, the current state of the product, technical constraints, and primary goals..."
-          className="w-full px-4 py-3 rounded-xl bg-bg-elevated border border-border-subtle focus:border-accent-primary text-base sm:text-sm text-text-primary placeholder:text-text-muted/60 focus:outline-none min-h-[110px] transition-colors resize-y leading-relaxed"
+          className="w-full px-4 py-3 rounded-xl bg-black/40 border border-border-strong text-text-primary text-sm focus:border-accent-primary focus:outline-none resize-y min-h-[120px]"
         />
       </div>
 
-      {/* Submit Action: Full-Width 48px+ on Mobile */}
-      <Button
-        type="submit"
-        disabled={loading}
-        variant="primary"
-        size="lg"
-        className="w-full justify-center mt-2 font-semibold min-h-[50px] text-sm"
-        icon={loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-      >
-        {loading ? "Submitting Inquiry..." : "Send Project Inquiry"}
-      </Button>
+      {/* Submit Action */}
+      <div className="pt-2">
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full py-4 rounded-xl bg-text-primary text-bg-primary hover:bg-white font-semibold text-sm uppercase tracking-wider transition-all min-h-[50px] flex items-center justify-center gap-2 shadow-sm disabled:opacity-50"
+        >
+          {loading ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              <span>Transmitting Inquiry...</span>
+            </>
+          ) : (
+            <>
+              <span>Send Project Inquiry</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </>
+          )}
+        </button>
 
-      <p className="text-[11px] font-mono text-text-muted text-center leading-normal">
-        Guaranteed 24-hour response • Confidential & protected under NDA
-      </p>
+        <p className="text-[11px] font-mono text-text-muted text-center mt-3">
+          Guaranteed response within 24 hours. Strict confidentiality &amp; mutual NDA protected.
+        </p>
+      </div>
     </form>
   );
 }

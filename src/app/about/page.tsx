@@ -14,10 +14,7 @@ export default function AboutPage() {
     <div className="pt-24 pb-20 w-full">
       <About />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-        <ProfessionalProfiles
-          title="Direct Channels"
-          subtitle="Reach out via any preferred network to discuss client projects or consultations."
-        />
+        <ProfessionalProfiles />
       </div>
     </div>
   );

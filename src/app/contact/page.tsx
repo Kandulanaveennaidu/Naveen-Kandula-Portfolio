@@ -60,10 +60,7 @@ export default function ContactPage() {
 
         {/* Bottom: Professional Profiles Section */}
         <div className="pt-12 border-t border-border-subtle">
-          <ProfessionalProfiles
-            title="Alternative Direct Channels"
-            subtitle="Prefer connecting on social platforms or chatting on WhatsApp? Feel free to reach out directly."
-          />
+          <ProfessionalProfiles />
         </div>
       </div>
     </div>
