@@ -73,10 +73,11 @@ export async function sendInquiryNotification(inquiry: ContactInquiry): Promise<
   // Check if Resend API key is available
   if (process.env.RESEND_API_KEY) {
     try {
+      const apiKey = process.env.RESEND_API_KEY.trim().replace(/^["']|["']$/g, "");
       const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+          Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({

@@ -6,7 +6,6 @@ import {
   Server, 
   Database, 
   Sparkles, 
-  ArrowRight, 
   CheckCircle2, 
   ShieldCheck, 
   Zap,
@@ -79,23 +78,25 @@ export default function ArchitectureGraph() {
   const activeNode = SYSTEM_NODES.find(n => n.id === activeNodeId) || SYSTEM_NODES[0];
 
   return (
-    <div className="w-full relative rounded-2xl bg-bg-card border border-border-subtle overflow-hidden shadow-2xl p-5 sm:p-7 backdrop-blur-xl">
-      {/* Subtle top header simulation */}
-      <div className="flex items-center justify-between pb-4 border-b border-border-subtle mb-6 text-xs text-text-muted font-mono">
+    <div className="w-full relative rounded-3xl bg-bg-card border border-border-subtle overflow-hidden shadow-2xl p-4 sm:p-6 md:p-8 backdrop-blur-xl">
+      {/* Top Header Simulation */}
+      <div className="flex flex-wrap items-center justify-between pb-3 sm:pb-4 border-b border-border-subtle mb-4 sm:mb-6 text-[11px] font-mono gap-2">
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
           <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
           <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-          <span className="ml-2 text-text-secondary font-medium">system-topology.spec.ts</span>
+          <span className="ml-1 text-text-secondary font-medium truncate max-w-[160px] sm:max-w-none">
+            system-topology.spec.ts
+          </span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 text-accent-success font-medium">
           <span className="w-1.5 h-1.5 rounded-full bg-accent-success animate-pulse" />
-          <span className="text-text-secondary">Production Architecture</span>
+          <span>Production Architecture</span>
         </div>
       </div>
 
-      {/* Nodes visual flow */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6 relative">
+      {/* Nodes Switcher: Responsive 2-column on mobile, 4-column on desktop */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-6">
         {SYSTEM_NODES.map((node, index) => {
           const Icon = node.icon;
           const isSelected = node.id === activeNodeId;
@@ -106,69 +107,67 @@ export default function ArchitectureGraph() {
               type="button"
               onClick={() => setActiveNodeId(node.id)}
               className={cn(
-                "relative text-left p-4 rounded-xl border transition-all duration-300 group focus:outline-none cursor-pointer",
+                "relative text-left p-3 sm:p-4 rounded-xl border transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[88px] sm:min-h-[104px]",
                 isSelected
-                  ? "bg-bg-elevated border-white/30 shadow-[0_0_20px_rgba(124,92,255,0.15)]"
+                  ? "bg-bg-elevated border-white/30 shadow-md"
                   : "bg-white/[0.02] border-border-subtle hover:border-white/15 hover:bg-white/[0.04]"
               )}
             >
-              {/* Active selection indicator bar */}
               {isSelected && (
                 <div 
-                  className="absolute top-0 left-4 right-4 h-[2px] rounded-full"
+                  className="absolute top-0 left-2 right-2 h-[2px] rounded-full"
                   style={{ backgroundColor: node.accent }}
                 />
               )}
 
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-between mb-1.5">
                 <div 
-                  className="w-9 h-9 rounded-lg flex items-center justify-center border transition-all duration-300"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center border"
                   style={{ 
                     backgroundColor: `${node.accent}15`, 
                     borderColor: `${node.accent}40`,
                     color: node.accent
                   }}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-3.5 h-3.5" />
                 </div>
-                <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-white/[0.04] text-text-muted">
+                <span className="text-[10px] font-mono text-text-muted">
                   0{index + 1}
                 </span>
               </div>
 
-              <div className="text-xs font-mono text-text-muted mb-0.5">
-                {node.category}
-              </div>
-              <div className="text-sm font-semibold text-text-primary group-hover:text-white transition-colors mb-1">
-                {node.name}
-              </div>
-              <div className="text-[11px] font-mono text-text-secondary truncate">
-                {node.tech}
+              <div>
+                <div className="text-xs sm:text-sm font-semibold text-text-primary truncate">
+                  {node.name}
+                </div>
+                <div className="text-[10px] sm:text-[11px] font-mono text-text-muted truncate">
+                  {node.category}
+                </div>
               </div>
             </button>
           );
         })}
       </div>
 
-      {/* Live Dataflow Pipeline Inspector */}
-      <div className="p-4 sm:p-5 rounded-xl bg-bg-primary/90 border border-border-subtle">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 mb-3 border-b border-border-subtle">
+      {/* Live Node Inspector */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-bg-primary/95 border border-border-subtle">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-3 border-b border-border-subtle text-xs font-mono">
           <div className="flex items-center gap-2">
             <span 
-              className="w-2 h-2 rounded-full" 
+              className="w-2 h-2 rounded-full shrink-0" 
               style={{ backgroundColor: activeNode.accent }} 
             />
-            <span className="text-xs font-mono uppercase tracking-wider font-semibold text-text-primary">
+            <span className="font-bold text-text-primary">
               {activeNode.name} Inspector
             </span>
-            <span className="text-[11px] font-mono text-text-muted hidden sm:inline">
+            <span className="text-[10px] text-text-muted hidden sm:inline">
               // {activeNode.status}
             </span>
           </div>
 
-          <div className="flex items-center gap-3 text-xs font-mono">
-            <span className="text-text-muted">Metrics:</span>
-            <span className="text-accent-cyan font-medium">{activeNode.metrics}</span>
+          <div className="flex items-center gap-2 text-[11px]">
+            <span className="text-text-muted">Target Metric:</span>
+            <span className="text-accent-cyan font-semibold">{activeNode.metrics}</span>
           </div>
         </div>
 
@@ -176,16 +175,15 @@ export default function ArchitectureGraph() {
           {activeNode.details}
         </p>
 
-        {/* Stack Capability Badges */}
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-[11px] font-mono text-text-muted mr-1">Guarantees:</span>
-          <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2.5 py-1 rounded bg-white/[0.03] border border-white/[0.06] text-text-secondary">
+        {/* Guarantees Badges */}
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-mono">
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-text-secondary">
             <CheckCircle2 className="w-3 h-3 text-accent-success" /> Production-Ready
           </span>
-          <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2.5 py-1 rounded bg-white/[0.03] border border-white/[0.06] text-text-secondary">
-            <ShieldCheck className="w-3 h-3 text-accent-cyan" /> Secure Boundaries
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-text-secondary">
+            <ShieldCheck className="w-3 h-3 text-accent-cyan" /> Secure Boundary
           </span>
-          <span className="inline-flex items-center gap-1 text-[11px] font-mono px-2.5 py-1 rounded bg-white/[0.03] border border-white/[0.06] text-text-secondary">
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-text-secondary">
             <Zap className="w-3 h-3 text-accent-primary" /> Low Latency
           </span>
         </div>

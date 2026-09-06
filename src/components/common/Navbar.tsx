@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight, Code2 } from "lucide-react";
+import { Menu, X, ArrowUpRight, Code2, Sparkles, MessageSquare } from "lucide-react";
 import Button from "./Button";
 import { cn } from "@/lib/utils";
 
@@ -20,120 +20,193 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const menuRef = useRef<HTMLDivElement>(null);
 
+  // Scroll detection for navbar elevation
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 15);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Lock body scroll when mobile menu is open to prevent background scrolling
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalStyle;
+      };
+    }
+  }, [mobileMenuOpen]);
+
+  // Handle Escape key to close mobile menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
+
+  // Close menu on pathname change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 sm:px-6 lg:px-8 py-4",
-        isScrolled ? "py-3" : "py-5"
-      )}
-    >
-      <div
+    <>
+      <header
         className={cn(
-          "max-w-6xl mx-auto flex items-center justify-between px-5 py-2.5 rounded-2xl transition-all duration-300",
-          isScrolled
-            ? "bg-bg-card/85 backdrop-blur-md border border-border-subtle shadow-xl shadow-black/40"
-            : "bg-transparent border border-transparent"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-3 sm:px-6 lg:px-8",
+          isScrolled ? "py-2 sm:py-3" : "py-3 sm:py-5"
         )}
       >
-        {/* Brand Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 group focus:outline-none"
-          aria-label="Naveen Kandula Portfolio Home"
+        <div
+          className={cn(
+            "max-w-6xl mx-auto flex items-center justify-between px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-2xl transition-all duration-300",
+            isScrolled || mobileMenuOpen
+              ? "bg-bg-card/90 backdrop-blur-xl border border-border-subtle shadow-xl shadow-black/50"
+              : "bg-transparent border border-transparent"
+          )}
         >
-          <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-border-subtle flex items-center justify-center text-accent-primary group-hover:border-accent-primary/40 group-hover:bg-accent-primary/10 transition-all duration-300">
-            <Code2 className="w-4 h-4" />
-          </div>
-          <span className="font-bold tracking-tight text-lg text-text-primary group-hover:text-white transition-colors">
-            NAVEEN<span className="text-accent-primary">.</span>
-          </span>
-        </Link>
-
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1" aria-label="Main Navigation">
-          {NAV_LINKS.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={cn(
-                  "px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all duration-200",
-                  isActive
-                    ? "text-text-primary bg-white/[0.06] font-semibold"
-                    : "text-text-secondary hover:text-text-primary hover:bg-white/[0.03]"
-                )}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Right Action Button */}
-        <div className="hidden md:flex items-center gap-3">
-          <Button
-            size="sm"
-            href="/contact"
-            variant="primary"
-            icon={<ArrowUpRight className="w-3.5 h-3.5" />}
+          {/* Brand Logo */}
+          <Link
+            href="/"
+            onClick={closeMobileMenu}
+            className="flex items-center gap-2 group focus:outline-none min-h-[44px] py-1"
+            aria-label="Naveen Kandula Home"
           >
-            Start a Project
-          </Button>
-        </div>
+            <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-border-subtle flex items-center justify-center text-accent-primary group-hover:border-accent-primary/40 group-hover:bg-accent-primary/10 transition-all duration-300">
+              <Code2 className="w-4 h-4" />
+            </div>
+            <span className="font-bold tracking-tight text-base sm:text-lg text-text-primary group-hover:text-white transition-colors">
+              NAVEEN<span className="text-accent-primary">.</span>
+            </span>
+          </Link>
 
-        {/* Mobile Menu Toggle Button */}
-        <button
-          type="button"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-white/[0.05] border border-transparent focus:outline-none focus:border-border-subtle"
-          aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-          aria-expanded={mobileMenuOpen}
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
-      </div>
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-1" aria-label="Desktop Navigation">
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={cn(
+                    "px-3.5 py-2 rounded-lg text-xs font-medium transition-all duration-200",
+                    isActive
+                      ? "text-text-primary bg-white/[0.08] font-semibold"
+                      : "text-text-secondary hover:text-text-primary hover:bg-white/[0.04]"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </nav>
 
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="md:hidden mt-2 p-4 rounded-2xl bg-bg-card/95 backdrop-blur-xl border border-border-subtle shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="flex flex-col gap-1 mb-4">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                onClick={closeMobileMenu}
-                className="px-4 py-2.5 rounded-xl text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-white/[0.05] transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* Desktop CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <Button
+              size="sm"
+              href="/contact"
+              variant="primary"
+              icon={<ArrowUpRight className="w-3.5 h-3.5" />}
+            >
+              Start a Project
+            </Button>
           </div>
-          <div className="pt-3 border-t border-border-subtle">
+
+          {/* Mobile Menu Toggle (Minimum 48px Touch Target) */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden flex items-center justify-center w-12 h-12 rounded-xl text-text-secondary hover:text-text-primary hover:bg-white/[0.06] border border-border-subtle focus:outline-none active:scale-95 transition-all"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation-drawer"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5 text-accent-cyan" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+      </header>
+
+      {/* Full-Screen Mobile Navigation Overlay Drawer */}
+      {mobileMenuOpen && (
+        <div
+          id="mobile-navigation-drawer"
+          ref={menuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation"
+          className="fixed inset-0 z-40 md:hidden bg-bg-primary/95 backdrop-blur-2xl flex flex-col justify-between pt-24 pb-8 px-6 overflow-y-auto animate-in fade-in duration-200"
+        >
+          {/* Navigation Links */}
+          <div className="flex flex-col gap-2 my-auto max-w-sm w-full mx-auto">
+            <div className="text-[11px] font-mono uppercase tracking-widest text-accent-cyan mb-2">
+              Navigation Menu
+            </div>
+
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={closeMobileMenu}
+                  className={cn(
+                    "flex items-center justify-between px-4 py-3.5 rounded-2xl text-base font-semibold transition-all min-h-[52px]",
+                    isActive
+                      ? "bg-accent-primary/15 text-white border border-accent-primary/30"
+                      : "text-text-secondary hover:text-white hover:bg-white/[0.04] border border-transparent"
+                  )}
+                >
+                  <span>{link.label}</span>
+                  <ArrowUpRight className="w-4 h-4 opacity-50" />
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Bottom Actions inside Mobile Drawer */}
+          <div className="pt-6 border-t border-border-subtle flex flex-col gap-3 max-w-sm w-full mx-auto pb-safe">
             <Button
               href="/contact"
               variant="primary"
-              className="w-full justify-center"
+              size="lg"
+              className="w-full justify-center min-h-[48px] text-sm font-semibold"
               onClick={closeMobileMenu}
               icon={<ArrowUpRight className="w-4 h-4" />}
             >
               Start a Project
             </Button>
+
+            <a
+              href="https://wa.me/919705627977"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMobileMenu}
+              className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-xs font-mono text-accent-cyan transition-colors min-h-[44px]"
+            >
+              <MessageSquare className="w-3.5 h-3.5" />
+              <span>Chat on WhatsApp Directly</span>
+            </a>
+
+            <div className="text-center text-[11px] font-mono text-text-muted mt-1">
+              Available for freelance contracts
+            </div>
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }

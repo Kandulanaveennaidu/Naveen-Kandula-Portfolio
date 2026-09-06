@@ -19,25 +19,25 @@ export default function SectionHeader({
   return (
     <div
       className={cn(
-        "mb-12 md:mb-16",
+        "mb-8 sm:mb-12 md:mb-16",
         align === "center" ? "text-center mx-auto max-w-3xl" : "max-w-2xl",
         className
       )}
     >
       <div
         className={cn(
-          "inline-flex items-center gap-2 mb-3 text-xs font-mono tracking-wider uppercase text-accent-cyan",
+          "inline-flex items-center gap-2 mb-2 sm:mb-3 text-[11px] sm:text-xs font-mono tracking-wider uppercase text-accent-cyan",
           align === "center" && "justify-center"
         )}
       >
         <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan" />
         <span>{eyebrow}</span>
       </div>
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-text-primary leading-[1.15] mb-4">
+      <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-text-primary leading-[1.18] sm:leading-[1.15] mb-3 sm:mb-4">
         {title}
       </h2>
       {description && (
-        <p className="text-text-secondary text-base sm:text-lg leading-relaxed font-normal">
+        <p className="text-text-secondary text-sm sm:text-base md:text-lg leading-relaxed font-normal">
           {description}
         </p>
       )}

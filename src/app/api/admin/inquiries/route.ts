@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 function isAuthorized(request: NextRequest): boolean {
   const authHeader = request.headers.get("authorization");
-  const adminKey = process.env.ADMIN_ACCESS_KEY || "naveen_admin_secure_2026";
+  const adminKey = (process.env.ADMIN_ACCESS_KEY || "naveen_admin_secure_2026").trim().replace(/^["']|["']$/g, "");
   
   if (authHeader && authHeader === `Bearer ${adminKey}`) {
     return true;

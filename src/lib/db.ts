@@ -26,9 +26,18 @@ export function getDbPool(): Pool | null {
     return null;
   }
   if (!pool) {
+    let connStr = process.env.DATABASE_URL.trim();
+    if ((connStr.startsWith('"') && connStr.endsWith('"')) || (connStr.startsWith("'") && connStr.endsWith("'"))) {
+      connStr = connStr.slice(1, -1);
+    }
+    // Strip query parameters like channel_binding that standard node-pg might not recognize
+    connStr = connStr.replace(/([?&])channel_binding=[^&]*(&?)/, (match, p1, p2) => {
+      return p1 === "?" && p2 ? "?" : "";
+    });
+
     pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      ssl: process.env.DATABASE_URL.includes("localhost") ? false : { rejectUnauthorized: false },
+      connectionString: connStr,
+      ssl: connStr.includes("localhost") ? false : { rejectUnauthorized: false },
     });
   }
   return pool;
@@ -70,7 +79,7 @@ export async function initDatabase() {
         CREATE INDEX IF NOT EXISTS idx_inquiries_status ON contact_inquiries(status);
         CREATE INDEX IF NOT EXISTS idx_inquiries_created ON contact_inquiries(created_at DESC);
       `);
-      console.log("[DB] PostgreSQL contact_inquiries table initialized successfully.");
+      console.log("[DB] Neon PostgreSQL contact_inquiries table verified/initialized.");
       return true;
     } catch (err) {
       console.error("[DB] Error initializing PostgreSQL table:", err);
@@ -102,34 +111,44 @@ export async function saveInquiry(inquiry: Omit<ContactInquiry, "id" | "status" 
 
   const db = getDbPool();
   if (db) {
-    await initDatabase();
-    const query = `
-      INSERT INTO contact_inquiries (
-        id, name, email, company, phone, project_type, budget, timeline, preferred_contact, message, source, status, created_at, updated_at
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
-      RETURNING *;
-    `;
-    const values = [
-      record.id,
-      record.name,
-      record.email,
-      record.company,
-      record.phone,
-      record.project_type,
-      record.budget,
-      record.timeline,
-      record.preferred_contact,
-      record.message,
-      record.source,
-      record.status,
-      record.created_at,
-      record.updated_at,
-    ];
+    try {
+      await initDatabase();
+      const query = `
+        INSERT INTO contact_inquiries (
+          id, name, email, company, phone, project_type, budget, timeline, preferred_contact, message, source, status, created_at, updated_at
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+        RETURNING *;
+      `;
+      const values = [
+        record.id,
+        record.name,
+        record.email,
+        record.company,
+        record.phone,
+        record.project_type,
+        record.budget,
+        record.timeline,
+        record.preferred_contact,
+        record.message,
+        record.source,
+        record.status,
+        record.created_at,
+        record.updated_at,
+      ];
 
-    const result = await db.query(query, values);
-    return result.rows[0];
+      const result = await db.query(query, values);
+      console.log(`[DB] Inquiry persisted to Neon PostgreSQL with ID: ${record.id}`);
+      return result.rows[0];
+    } catch (dbErr) {
+      console.error("[DB INSERT ERROR, FALLING BACK TO LOCAL]", dbErr);
+      ensureLocalStorageExists();
+      const data = fs.readFileSync(LOCAL_STORAGE_FILE, "utf-8");
+      const inquiries: ContactInquiry[] = data ? JSON.parse(data) : [];
+      inquiries.unshift(record);
+      fs.writeFileSync(LOCAL_STORAGE_FILE, JSON.stringify(inquiries, null, 2), "utf-8");
+      return record;
+    }
   } else {
-    // Local fallback persistence
     ensureLocalStorageExists();
     const data = fs.readFileSync(LOCAL_STORAGE_FILE, "utf-8");
     const inquiries: ContactInquiry[] = data ? JSON.parse(data) : [];
@@ -143,15 +162,26 @@ export async function saveInquiry(inquiry: Omit<ContactInquiry, "id" | "status" 
 export async function getInquiries(statusFilter?: string): Promise<ContactInquiry[]> {
   const db = getDbPool();
   if (db) {
-    await initDatabase();
-    let query = "SELECT * FROM contact_inquiries ORDER BY created_at DESC;";
-    let values: any[] = [];
-    if (statusFilter && statusFilter !== "all") {
-      query = "SELECT * FROM contact_inquiries WHERE status = $1 ORDER BY created_at DESC;";
-      values = [statusFilter];
+    try {
+      await initDatabase();
+      let query = "SELECT * FROM contact_inquiries ORDER BY created_at DESC;";
+      let values: any[] = [];
+      if (statusFilter && statusFilter !== "all") {
+        query = "SELECT * FROM contact_inquiries WHERE status = $1 ORDER BY created_at DESC;";
+        values = [statusFilter];
+      }
+      const result = await db.query(query, values);
+      return result.rows;
+    } catch (err) {
+      console.error("[DB FETCH ERROR, FALLING BACK TO LOCAL]", err);
+      ensureLocalStorageExists();
+      const data = fs.readFileSync(LOCAL_STORAGE_FILE, "utf-8");
+      const inquiries: ContactInquiry[] = data ? JSON.parse(data) : [];
+      if (statusFilter && statusFilter !== "all") {
+        return inquiries.filter((i) => i.status === statusFilter);
+      }
+      return inquiries;
     }
-    const result = await db.query(query, values);
-    return result.rows;
   } else {
     ensureLocalStorageExists();
     const data = fs.readFileSync(LOCAL_STORAGE_FILE, "utf-8");
@@ -167,10 +197,15 @@ export async function updateInquiryStatus(id: string, status: ContactInquiry["st
   const db = getDbPool();
   const now = new Date().toISOString();
   if (db) {
-    await initDatabase();
-    const query = "UPDATE contact_inquiries SET status = $1, updated_at = $2 WHERE id = $3;";
-    await db.query(query, [status, now, id]);
-    return true;
+    try {
+      await initDatabase();
+      const query = "UPDATE contact_inquiries SET status = $1, updated_at = $2 WHERE id = $3;";
+      await db.query(query, [status, now, id]);
+      return true;
+    } catch (err) {
+      console.error("[DB UPDATE ERROR]", err);
+      return false;
+    }
   } else {
     ensureLocalStorageExists();
     const data = fs.readFileSync(LOCAL_STORAGE_FILE, "utf-8");

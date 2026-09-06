@@ -8,8 +8,8 @@ import {
   SlidersHorizontal, 
   Database, 
   CheckCircle2, 
-  ArrowRight,
-  ShieldAlert
+  ShieldAlert,
+  ArrowDown
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -93,21 +93,21 @@ export default function AIPipelineVisual() {
   const currentStep = PIPELINE_STEPS.find((s) => s.id === activeStepId) || PIPELINE_STEPS[2];
 
   return (
-    <div className="w-full rounded-2xl bg-bg-card border border-border-subtle p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-6 border-b border-border-subtle gap-2">
+    <div className="w-full rounded-3xl bg-bg-card border border-border-subtle p-4 sm:p-6 md:p-8 backdrop-blur-xl shadow-2xl">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 sm:pb-4 mb-4 sm:mb-6 border-b border-border-subtle gap-2">
         <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-accent-primary" />
+          <Sparkles className="w-4 h-4 text-accent-primary shrink-0" />
           <span className="text-xs font-mono font-semibold uppercase tracking-wider text-text-primary">
             Production AI Pipeline Topology
           </span>
         </div>
         <span className="text-[11px] font-mono text-text-muted">
-          Click any stage to inspect guardrails & dataflow
+          Tap any stage to inspect guardrails & dataflow
         </span>
       </div>
 
-      {/* Pipeline Navigation Bar */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-6">
+      {/* Responsive Step Selector: 2-col on mobile, 3-col on sm, 6-col on lg */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-4 sm:mb-6">
         {PIPELINE_STEPS.map((step) => {
           const Icon = step.icon;
           const isSelected = step.id === activeStepId;
@@ -118,13 +118,13 @@ export default function AIPipelineVisual() {
               type="button"
               onClick={() => setActiveStepId(step.id)}
               className={cn(
-                "p-3 rounded-xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between",
+                "p-3 rounded-xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[76px]",
                 isSelected
                   ? "bg-bg-elevated border-white/30 shadow-md"
                   : "bg-white/[0.02] border-border-subtle hover:border-white/15 hover:bg-white/[0.04]"
               )}
             >
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-1">
                 <span className="text-[10px] font-mono text-text-muted">{step.step}</span>
                 <Icon 
                   className="w-3.5 h-3.5" 
@@ -140,31 +140,31 @@ export default function AIPipelineVisual() {
       </div>
 
       {/* Stage Detail Terminal Box */}
-      <div className="p-5 rounded-xl bg-bg-primary/95 border border-border-subtle font-mono text-xs">
+      <div className="p-4 sm:p-5 rounded-2xl bg-bg-primary/95 border border-border-subtle font-mono text-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 mb-3 border-b border-border-subtle gap-2">
           <div className="flex items-center gap-2">
             <span 
-              className="w-2 h-2 rounded-full" 
+              className="w-2 h-2 rounded-full shrink-0" 
               style={{ backgroundColor: currentStep.accent }} 
             />
             <span className="text-text-primary font-bold">
               Stage {currentStep.step}: {currentStep.label}
             </span>
           </div>
-          <div className="flex items-center gap-1.5 text-accent-cyan text-[11px]">
-            <ShieldAlert className="w-3.5 h-3.5" />
-            <span>Guardrail: {currentStep.securityGuardrail}</span>
+          <div className="flex items-center gap-1 text-accent-cyan text-[11px]">
+            <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
+            <span className="truncate">Guardrail: {currentStep.securityGuardrail}</span>
           </div>
         </div>
 
-        <div className="mb-3 text-text-secondary">
+        <div className="mb-3 text-text-secondary text-xs leading-relaxed">
           <span className="text-text-muted">// Execution: </span>
           {currentStep.action}
         </div>
 
-        <div className="p-3 rounded-lg bg-black/40 border border-white/[0.06] text-text-primary overflow-x-auto">
-          <div className="text-[10px] text-text-muted uppercase mb-1">Live Schema Payload</div>
-          <pre className="text-accent-cyan text-[11px] leading-relaxed">
+        <div className="p-3 rounded-xl bg-black/40 border border-white/[0.06] text-text-primary overflow-x-auto">
+          <div className="text-[10px] text-text-muted uppercase mb-1">Schema Payload Contract</div>
+          <pre className="text-accent-cyan text-[11px] leading-relaxed whitespace-pre-wrap break-all sm:break-normal">
             {currentStep.payloadExample}
           </pre>
         </div>
