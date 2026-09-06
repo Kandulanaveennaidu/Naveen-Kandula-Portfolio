@@ -43,15 +43,15 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
-    slug: "calendit-ai",
-    title: "Calendit.ai – AI-Powered Meeting Scheduler",
+    slug: "calendnow-ai",
+    title: "Calendnow.ai – AI-Powered Meeting Scheduler",
     category: "AI Integration",
     shortDescription: "An intelligent scheduling tool powered by AI and conversational NLP that simplifies meeting coordination and calendar slot booking.",
     tagline: "Automated meeting orchestration powered by conversational AI.",
     role: "Full-Stack & AI Integration Engineer",
     timeline: "Production Web Product",
     featured: true,
-    image: "/Calendit.ai.png",
+    image: "/Calendnow.ai.png",
     problem: "Coordinating multi-attendee schedules across fluctuating timezones consumed valuable executive time with endless back-and-forth emails.",
     solution: "Developed an intelligent scheduling platform powered by AI/NLP workflows that parses user availability intent, prevents double-booking conflicts, and dispatches automated calendar invitations.",
     architecture: {
@@ -83,12 +83,12 @@ export const projectsData: Project[] = [
     metricsPlaceholder: [
       { label: "Booking Speed", value: "< 30s", sublabel: "From link to confirmation" },
       { label: "Conflict Rate", value: "0%", sublabel: "Atomic slot reservation" },
-      { label: "Adoption", value: "Production", sublabel: "Live at calendit.ai" }
+      { label: "Adoption", value: "Production", sublabel: "Live at calendnow.ai" }
     ],
     links: {
-      liveUrl: "https://calendit.ai/",
+      liveUrl: "https://calendnow.ai/",
       githubUrl: "",
-      caseStudyUrl: "/projects/calendit-ai"
+      caseStudyUrl: "/projects/calendnow-ai"
     },
     visual: {
       accentColor: "#7C5CFF",
